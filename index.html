@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/estiloForm.css">
+    <title>Sigefica</title>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo-if">
+                <img src="./assets/imgs/logo-if.png" alt="logo-ifrn" width="6%">
+            </div>
+            <div class="titulo">
+                <h1>Sigefica - Sistema Gerador de Ficha Catalográfica</h1>
+            </div>
+            <div class="pag-tutorial">
+                <a href="./tutorial.html">Tutorial</a>
+            </div>
+        </div>
+    </header>
+    <div class="sigefica">
+        <form action="processar_email.php" method="post">
+            <div class="infosBasicas">
+                <legend>Informações Básicas</legend><hr>
+
+                <label for="nomeAluno">Nome:</label><br>
+                <input type="text" required placeholder="Nome do aluno"><br>
+                <span>Ex.: Para o nome João Pedro de Oliveira, digitar João Pedro de.</span><br><br>
+
+                <label for="nomeAluno">Sobrenome:</label><br>
+                <input type="text" required placeholder="Sobrenome do aluno"><br>
+                <span>Ex.: Para o nome João Pedro de Oliveira, digitar Oliveira.</span><br><br>
+
+                <label for="titulo">Título:</label><br>
+                <input type="text" required placeholder="Sobrenome do aluno"><br><br>
+
+                <label for="codigoCutter">Código Cutter:</label><br>
+                <input type="text" required placeholder="Sobrenome do aluno"><br><br>
+
+                <label for="tipoTcc">Tipo de Trabalho:</label><br>
+                <select required>
+                    <option value="selectCurso">--Selecionar Tipo de Trabalho--</option>
+                    <option value="tccTecnico">TCC (Técnico)</option>
+                    <option value="tccGraduacao">TCC (Graduação)</option>
+                    <option value="tccEspecializacao">TCC (Especialização)</option>
+                    <option value="mestradoAcademicoE">Mestrado Acadêmico em Ensino</option>
+                    <option value="mestradoAcademicoEP">Mestrado Acadêmico em Educação Profissional</option>
+                    <option value="mestradoProfissionalEF">Mestrado Profissional em Ensino de Física</option>
+                    <option value="mestradoProfissionalEPT">Mestrado Profissional em Educação Profissional e Tecnológica</option>
+                    <option value="mestradoProfissionalUSR">Mestrado Profissional em Uso Sustentável dos Recursos Naturais</option>
+                    <option value="doutoradoAcademicoEP">Doutorado Acadêmico em Educação Profissional</option>
+                </select><br><br>
+
+                <label for="curso">Curso:</label><br>
+                <select>
+                    <option value="selectCurso">--Selecionar Curso--</option>
+                    <option value="info">--Informática--</option>
+                    <option value="mec">--Mecânica--</option>
+                    <option value="eletro">--Eletrotécnica--</option>
+                    <option value="edifica">--Edificações--</option>
+                </select><br><br>
+            </div>
+            <div class="dadosOrientador">
+                <legend>Dados do Orientador</legend><hr>
+
+                <label for="nomeOrientador">Nome:</label><br>
+                <input type="text" required placeholder="Nome do Orientador"><br><br>
+
+                <label for="titulacao">Titulação</label><br>
+                <select required>
+                    <option value="selectTitulacao">--Selecionar Titulação--</option>
+                    <option value="especialista">Especialista</option>
+                    <option value="mestre">Mestre(a)</option>
+                    <option value="doutor">Doutor(a)</option>
+                </select>   
+            </div>
+
+            <div class="palavrasChave">
+                <legend>Palávras Chave</legend><hr>
+                <span>Você pode adicionar até 5 palavras chave</span><br>
+                <label for="palavrasChave">1</label>
+                <input type="text" required placeholder="Palavra chave 1">
+                <input type="button" value="Adicionar outra palavra chave">
+            </div>
+            <div class="outrasInfos">
+                <legend>Outras Informações</legend><hr>
+                <label for="localPublicacao">Local:</label><br>
+                <input type="text" required placeholder="Informe o local">
+                <input type="button" value="Adicionar outro local"><br><br>
+
+                <label for="anoPublicacao">Ano:</label>
+                <input type="number" value="2023" required><br><br>
+
+                <label for="numeroPaginas">Número de Páginas:</label>
+                <input type="number" value="100" required><br><br>
+            </div>
+            <input type="submit" value="Gerar Ficha Catalográfica" required>
+        </form>
+    </div>
+    <footer>
+        <img class="logo-ifrn" src="./assets/imgs/logo-ifrn.png" alt="logo-ifrn">
+        <div class="devs">
+            <h5>Densenvolvedores:</h5>
+            <a href="https://github.com/ehls01">Emanoel Heron</a>
+            <p>Francisco Jordel</p>
+            <p>Maria Eduarda</p>
+            <p>Pedro Lucas</p>
+        </div>
+        <p>@Sigefica</p>
+        <p>2023</p>
+    </footer>
+</body>
+</html>

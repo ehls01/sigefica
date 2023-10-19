@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Comfortaa', sans-serif;
+}
+
+/* ===== ESTILIZAÇÃO DO CABEÇALHO ===== */
+
+header .navbar{
+    background-color: #298f15;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1.5%;
+    font-size: 15px;        
+}
+
+.logo-if img{
+    text-align: left;
+    width: 30%;
+}
+
+.titulo h1{
+    text-align: center;
+}
+
+.pag-tutorial a{
+    text-align: right;
+    text-decoration: none;
+    color: black;
+    font-size: 30px;
+}
+
+/* ===== ESTILIZAÇÃO DO CORPO ===== */
+
+.sigefica{
+    margin: 2% 25%;
+}
+form{
+    background-color: rgb(243, 255, 231);
+    border: solid 1px #c0c4c0;
+    border-radius: 10px;
+    padding: 2%;
+}
+form div{
+    padding: 2% 0;
+}
+form legend{
+    font-weight: bold;
+    font-size: 25px;
+    padding: 1% 0;
+}
+input[type="text"],
+input[type="email"],
+input[type="number"] {
+    width: 100%;
+    padding: 2%;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* ===== ESTILIZAÇÃO DO RODAPÉ ===== */
+
+footer{
+    background-color: #298f15;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1.5%;
+}
+.devs a{
+    text-decoration: none;
+    color: black;
+}
+
+.logo-ifrn{
+    width: 30%;
+}
