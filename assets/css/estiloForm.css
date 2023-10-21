@@ -9,26 +9,20 @@
 
 /* ===== ESTILIZAÇÃO DO CABEÇALHO ===== */
 
-header .navbar{
+.navbar{
     background-color: #298f15;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    padding: 1.5%;
-    font-size: 15px;        
+    padding: 30px 2%;
+    font-size: 15px;
 }
 
-.logo-if img{
-    text-align: left;
+.logo-if{
     width: 30%;
 }
 
-.titulo h1{
-    text-align: center;
-}
-
-.pag-tutorial a{
-    text-align: right;
+.pag-tutorial{
     text-decoration: none;
     color: black;
     font-size: 30px;
@@ -37,29 +31,51 @@ header .navbar{
 /* ===== ESTILIZAÇÃO DO CORPO ===== */
 
 .sigefica{
-    margin: 2% 25%;
-}
-form{
     background-color: rgb(243, 255, 231);
     border: solid 1px #c0c4c0;
     border-radius: 10px;
     padding: 2%;
+    margin: 2% 25%;
+    box-shadow: 5px 5px 10px rgb(118, 145, 91);
 }
-form div{
-    padding: 2% 0;
+
+.input-group{
+    padding: 10px;
 }
-form legend{
+
+.input-group h2{
     font-weight: bold;
     font-size: 25px;
     padding: 1% 0;
 }
+
 input[type="text"],
 input[type="email"],
-input[type="number"] {
+input[type="number"]
+input[type="data"] {
     width: 100%;
     padding: 2%;
     border: 1px solid #ccc;
-    border-radius: 3px;
+    border-radius: 5px;
+}
+
+.input:focus {
+    border-color: #298f15;
+    box-shadow: 0 0 5px #298f15;
+}
+
+.button {
+    background-color: #298f15;
+    color: #fff;
+    border: 2px solid #298f15;
+    border-radius: 5px;
+    margin: 10px 0;
+    padding: 8px 16px;
+}
+
+.button:hover,
+.button:focus {
+    background-color: #39b81f;
 }
 
 /* ===== ESTILIZAÇÃO DO RODAPÉ ===== */
