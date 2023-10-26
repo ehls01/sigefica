@@ -78,6 +78,19 @@ input[type="data"] {
     background-color: #39b81f;
 }
 
+/* ===== ESTILIZAÇÃO DO PDF */
+
+.pdf-container {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.pdf-object {
+    width: 100%;
+    height: 100%;
+}
+
 /* ===== ESTILIZAÇÃO DO RODAPÉ ===== */
 
 footer{

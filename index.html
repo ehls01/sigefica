@@ -91,8 +91,17 @@
                     <input class="button" type="button" value="Adicionar outro local"><br><br>
     
                     <label for="anoPublicacao">Ano de publicação:</label>
-                    <input class="input" id="anoPublicacao" type="number" name="anoPublicacao" placeholder="2023" required><br><br>
-    
+                    <!-- <input class="input" id="anoPublicacao" type="number" name="anoPublicacao" placeholder="2023" required><br><br> -->
+                    <select name="anoPublicacao" id="anoPublicacao">
+                        <option value="selecioneAno">Selecione o ano</option>
+                        <option value="2000">2000</option>
+                        <option value="2001">2001</option>
+                        <option value="2002">2002</option>
+                        <option value="2003">2003</option>
+                        <option value="2004">2004</option>
+                        
+                    </select>
+
                     <label for="numeroPaginas">Número de Páginas:</label>
                     <input class="input" type="number" placeholder="100" required><br><br>
                 </div>
