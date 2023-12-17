@@ -14,7 +14,7 @@
     </header>
 
     <div class="container">
-        <form class="sigefica" action="#" method="post">
+        <form class="sigefica" onsubmit="puxarInfos(event)" method="post">
             <div class="input-group">
                 <h2>Informações Básicas</h2><hr>
                 <div class="input-box">
@@ -29,11 +29,11 @@
                     <label for="titulo">Título:</label><br>
                     <input class="input" id="titulo" type="text" name="titulo" placeholder="Sobrenome do aluno" required><br><br>
 
-                    <label for="codigoCutter">Código Cutter:</label><br>
-                    <input class="input" id="codigoCutter" type="text" name="codigoCutter" placeholder="Sobrenome do aluno" required><br><br>
+                    <!-- <label for="codigoCutter">Código Cutter:</label><br>
+                    <input class="input" id="codigoCutter" type="text" name="codigoCutter" placeholder="Sobrenome do aluno" required><br><br> -->
 
                     <label for="tipoTcc">Tipo de Trabalho:</label><br>
-                    <select required>
+                    <select id="tipoTrabalho" required>
                         <option value="selectCurso">--Selecionar Tipo de Trabalho--</option>
                         <option value="tccTecnico">TCC (Técnico)</option>
                         <option value="tccGraduacao">TCC (Graduação)</option>
@@ -47,7 +47,7 @@
                     </select><br><br>
 
                     <label for="curso">Curso:</label><br>
-                    <select>
+                    <select id="curso">
                         <option value="selectCurso">--Selecionar Curso--</option>
                         <option value="info">--Informática--</option>
                         <option value="mec">--Mecânica--</option>
@@ -64,7 +64,7 @@
                     <input class="input" id="nomeOrientador" type="text" name="nomeOrientador" placeholder="Nome do Orientador" required><br><br>
 
                     <label for="titulacao">Titulação</label><br>
-                    <select required>
+                    <select id="titulacao" required>
                         <option value="selectTitulacao">--Selecionar Titulação--</option>
                         <option value="especialista">Especialista</option>
                         <option value="mestre">Mestre(a)</option>
@@ -74,11 +74,11 @@
             </div>
 
             <div class="input-group">
-                <h2>Palávras Chave</h2><hr>
+                <h2>Palavras Chave</h2><hr>
                 <div class="input-box">
                     <span>Você pode adicionar até 5 palavras chave</span><br>
                     <label for="palavrasChave">1</label>
-                    <input class="input" id="palabrasChave" type="text" name="palavrasChave" placeholder="Palavra chave 1" required>
+                    <input class="input" id="palavrasChave" type="text" name="palavrasChave" placeholder="Palavra chave 1" required>
                     <input class="button" type="button" value="Adicionar outra palavra chave">
                 </div>
             </div>
@@ -103,7 +103,7 @@
                     </select>
 
                     <label for="numeroPaginas">Número de Páginas:</label>
-                    <input class="input" type="number" placeholder="100" required><br><br>
+                    <input id="numeroPaginas" class="input" type="number" placeholder="100" required><br><br>
                 </div>
             </div>
 
@@ -119,9 +119,71 @@
             <p>Francisco Jordel</p>
             <p>Maria Eduarda</p>
             <p>Pedro Lucas</p>
+            <a href="https://github.com/DerickCarvalho">Derick Carvalho -> API</a>
         </div>
         <p>@Sigefica</p>
         <p>2023</p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/gh/DerickCarvalho/cutterAPI/api.js"></script>
+    <script>
+        function puxarInfos(event) {
+            event.preventDefault(); // Desativa o comportamento padrão do formulário
+            
+            // Carregar informações do formulário:
+            const nomeAluno = document.getElementById("nomeAluno").value;
+            const sobrenomeAluno = document.getElementById("sobrenomeAluno").value;
+            const tituloTrabalho = document.getElementById("titulo").value;
+            const tipoTrabalho = document.getElementById("tipoTrabalho").value;
+            const curso = document.getElementById("curso").value;
+            const nomeOrientador = document.getElementById("nomeOrientador").value;
+            const titulacao = document.getElementById("titulacao").value;
+            const palavrasChave = document.getElementById("palavrasChave").value;
+            const localPublicacao = document.getElementById("localPublicacao").value;
+            const anoPublicacao = document.getElementById("anoPublicacao").value;
+            const numeroPaginas = document.getElementById("numeroPaginas").value;
+
+            // Criar código Cutter-Sanborn
+            const buscarCodigo = buscarMaisSimilar(data, sobrenomeAluno).codigo;
+
+            let primeiraLetraTrabalho = tituloTrabalho[0];
+            primeiraLetraTrabalho = primeiraLetraTrabalho.toLowerCase();
+
+            const cutterFinal = buscarCodigo + primeiraLetraTrabalho;
+
+            const informacoes = {
+                firstName: nomeAluno,
+                lastName: sobrenomeAluno,
+                cutter: cutterFinal,
+                jobTitle: tituloTrabalho,
+                jobType: tipoTrabalho,
+                curse: curso,
+                poName: nomeOrientador,
+                titulation: titulacao,
+                keyWords: palavrasChave,
+                pubLocate: localPublicacao,
+                yearPub: anoPublicacao,
+                numPag: numeroPaginas
+            };
+            
+            fetch('http://localhost:3000/receberDados', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(informacoes)
+            })
+            .then(response => response.text())
+            .then(message => {
+                console.log('Resposta do servidor:', message);
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+
+            const diretorioDownload = "../gerador-ficha/FichaCatalografica.docx";
+
+            window.location.href = `./downloadPage.php?diretorio=${diretorioDownload}`;
+        }
+    </script>
 </body>
 </html>
