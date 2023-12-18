@@ -25,7 +25,11 @@ app.post('/receberDados', (req, res) => {
         curse,
         poName,
         titulation,
-        keyWords,
+        keyWord1,
+        keyWord2,
+        keyWord3,
+        keyWord4,
+        keyWord5,
         pubLocate,
         yearPub,
         numPag
@@ -58,11 +62,11 @@ app.post('/receberDados', (req, res) => {
         tipoTrab: jobType,
         tipoTrab2: "otoTipo",
         nomeOrien: poName,
-        chave1: keyWords,
-        chave2: "",
-        chave3: "",
-        chave4: "",
-        chave5: "",
+        chave1: keyWord1,
+        chave2: keyWord2,
+        chave3: keyWord3,
+        chave4: keyWord4,
+        chave5: keyWord5,
     });
 
     const buf = doc.getZip().generate({

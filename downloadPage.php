@@ -35,7 +35,7 @@
                         console.error('Erro:', error);
                     });
                 
-                    window.location.href = "./index.html";
+                    window.location.href = "./index.php";
                 }, 2000);
             });            
     </script>

@@ -75,11 +75,40 @@
 
             <div class="input-group">
                 <h2>Palavras Chave</h2><hr>
+                <p>Caso tenha menos que 5 palavras, deixar em branco</p>
+
+                <br>
                 <div class="input-box">
-                    <span>Você pode adicionar até 5 palavras chave</span><br>
-                    <label for="palavrasChave">1</label>
-                    <input class="input" id="palavrasChave" type="text" name="palavrasChave" placeholder="Palavra chave 1" required>
-                    <input class="button" type="button" value="Adicionar outra palavra chave">
+                    <label for="palavraChave1">Palavra 1</label>
+                    <input class="input" id="palavraChave1" type="text" name="palavraChave1" placeholder="Palavra chave 1" required>
+                </div>
+
+                <br>
+
+                <div class="input-box">
+                    <label for="palavraChave2">Palavra 2</label>
+                    <input class="input" id="palavraChave2" type="text" name="palavraChave2" placeholder="Palavra chave 2" >
+                </div>
+
+                <br>
+
+                <div class="input-box">
+                    <label for="palavraChave3">Palavra 3</label>
+                    <input class="input" id="palavraChave3" type="text" name="palavraChave3" placeholder="Palavra chave 3" >
+                </div>
+
+                <br>
+
+                <div class="input-box">
+                    <label for="palavraChave4">Palavra 4</label>
+                    <input class="input" id="palavraChave4" type="text" name="palavraChave4" placeholder="Palavra chave 4" >
+                </div>
+
+                <br>
+
+                <div class="input-box">
+                    <label for="palavraChave5">Palavra 5</label>
+                    <input class="input" id="palavraChave5" type="text" name="palavraChave5" placeholder="Palavra chave 5" >
                 </div>
             </div>
 
@@ -94,13 +123,19 @@
                     <!-- <input class="input" id="anoPublicacao" type="number" name="anoPublicacao" placeholder="2023" required><br><br> -->
                     <select name="anoPublicacao" id="anoPublicacao">
                         <option value="selecioneAno">Selecione o ano</option>
-                        <option value="2000">2000</option>
-                        <option value="2001">2001</option>
-                        <option value="2002">2002</option>
-                        <option value="2003">2003</option>
-                        <option value="2004">2004</option>
-                        
+                        <?php
+                            $anoInicial = 2000;
+                            $anoAtual = intval(date("Y"));
+
+                            while ($anoInicial <= $anoAtual) {
+                                print "<option value=\"$anoInicial\">$anoInicial</option>";
+                                $anoInicial +=1;
+                            }
+                        ?>
                     </select>
+
+                    <br>
+                    <br>
 
                     <label for="numeroPaginas">Número de Páginas:</label>
                     <input id="numeroPaginas" class="input" type="number" placeholder="100" required><br><br>
@@ -137,10 +172,38 @@
             const curso = document.getElementById("curso").value;
             const nomeOrientador = document.getElementById("nomeOrientador").value;
             const titulacao = document.getElementById("titulacao").value;
-            const palavrasChave = document.getElementById("palavrasChave").value;
+            const palavraChave1 = document.getElementById("palavraChave1").value;
+
+            // Formatando palavras chave
+            let palavraChave2 = document.getElementById("palavraChave2").value;
+            if (palavraChave2 != "") {
+                palavraChave2 = "2. " + document.getElementById("palavraChave2").value;
+            }
+
+            let palavraChave3 = document.getElementById("palavraChave3").value;
+            if (palavraChave3 != "") {
+                palavraChave3 = "3. " + document.getElementById("palavraChave3").value;
+            }
+
+            let palavraChave4 = document.getElementById("palavraChave4").value;
+            if (palavraChave4 != "") {
+                palavraChave4 = "4. " + document.getElementById("palavraChave4").value;
+            }
+
+            let palavraChave5 = document.getElementById("palavraChave5").value;
+            if (palavraChave5 != "") {
+                palavraChave5 = "5. " + document.getElementById("palavraChave5").value + ".";
+            }
             const localPublicacao = document.getElementById("localPublicacao").value;
             const anoPublicacao = document.getElementById("anoPublicacao").value;
             const numeroPaginas = document.getElementById("numeroPaginas").value;
+
+            // PRA QUE SERVEM
+            // TANTOS CÓDIGOS
+            // SE A VIDA 
+            // NÃO É PROGRAMADA
+            // E AS MELHORES COISAS
+            // NÃO TEM LÓGICA
 
             // Criar código Cutter-Sanborn
             const buscarCodigo = buscarMaisSimilar(data, sobrenomeAluno).codigo;
@@ -159,7 +222,11 @@
                 curse: curso,
                 poName: nomeOrientador,
                 titulation: titulacao,
-                keyWords: palavrasChave,
+                keyWord1: palavraChave1,
+                keyWord2: palavraChave2,
+                keyWord3: palavraChave3,
+                keyWord4: palavraChave4,
+                keyWord5: palavraChave5,
                 pubLocate: localPublicacao,
                 yearPub: anoPublicacao,
                 numPag: numeroPaginas
