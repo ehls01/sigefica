@@ -1,4 +1,5 @@
 const express = require('express');
+const nodemailer = require('nodemailer');
 const fs = require('fs');
 const PizZip = require("pizzip");
 const path = require("path");
@@ -14,7 +15,7 @@ app.all('/', (req, res) => {
     res.send('gerarFicha'); // Menssagem caso não exista conteúdo
 });
 
-app.post('/receberDados', (req, res) => {    
+app.post('/receberDados', (req, res) => {        
 
     const {
         firstName,
@@ -23,6 +24,7 @@ app.post('/receberDados', (req, res) => {
         jobTitle,
         jobType,
         curse,
+        studentEmail,
         poName,
         titulation,
         keyWord1,
@@ -37,7 +39,7 @@ app.post('/receberDados', (req, res) => {
 
     const completeName = firstName + " " + lastName;
     
-    console.log(`Funcionando! Seu nome é: ${completeName}`);    
+    console.log(`Funcionando! Seu nome é: ${completeName}`);  
 
     const content = fs.readFileSync(
         path.resolve(__dirname, "ficha-padrao.docx"),
@@ -76,25 +78,78 @@ app.post('/receberDados', (req, res) => {
 
     try {
         fs.writeFileSync(path.resolve(__dirname, "FichaCatalografica.docx"), buf);
-        res.send('Ficha gerada com sucesso!');
+        res.send('Ficha gerada com sucesso!');        
+
+        const emailBibliotecaria = "derickjesiel96@gmail.com";
+
+        const transporter = nodemailer.createTransport({
+            host: 'smtp-relay.brevo.com', // Servidor SMTP
+            port: 587, // Porta do servidor SMTP
+            secure: false, // true para uso com SSL/TLS
+            auth: {
+              user: 'sigeficaifrn@gmail.com', // Seu endereço de e-mail
+              pass: 'NRwmqOtWxcFY9yVC' // Sua senha de e-mail
+            }
+        });
+
+        const construirEmail = {
+            from: 'sigeficaifrn@gmail.com', // Seu endereço de e-mail
+            to: emailBibliotecaria, // Endereço de e-mail do destinatário
+            subject: `Ficha catalográfica de ${completeName} para revisão`,
+            text: `Segue anexo a ficha catalográfica do aluno ${completeName}\n\nE-Mail do aluno para retorno: ${studentEmail}`,
+            attachments: [
+            {
+                filename: 'FichaCatalografica.docx', // Nome do arquivo anexo
+                path: 'C:/xampp/htdocs/sigefica/gerador-ficha/FichaCatalografica.docx' // Caminho absoluto do arquivo
+            }
+            ]
+        };
+
+        // // Enviando o e-mail
+        // dadosEmail.sendMail(construirEmail, (error, info) => {
+        //     if (error) {
+        //         res.status(500).send('Erro ao enviar o e-mail: ' + error.message);
+        //     } else {
+        //         res.send('E-mail enviado com sucesso para ' + construirEmail.to);
+        //     }
+        // });
+
+        try {
+            transporter.sendMail(construirEmail);
+            console.log(`Email enviado com sucesso para a bibliotecária!`);
+        } catch (error) {
+            console.log('Deu ruim!');
+        }
+
+        setTimeout(() => {
+            const diretorioArquivo = 'C:/xampp/htdocs/sigefica/gerador-ficha/FichaCatalografica.docx'; // Modificar para o seu
+
+            fs.unlink(diretorioArquivo, (err) => {
+                if (err) {
+                  console.error('Ocorreu um erro ao excluir o arquivo:', err);
+                  return;
+                }
+                console.log('Arquivo excluído com sucesso!');
+            });
+        }, 2000);
     } catch (error) {
-        res.send('Erro ao gerar ficha\n\nErro:', error);
+        res.send('Erro ao gerar e enviar ficha\n\nErro:', error);
     }
 });
 
-const diretorioArquivo = 'C:/xampp/htdocs/sigefica/gerador-ficha/FichaCatalografica.docx'; // Modificar para o seu
+// const diretorioArquivo = 'C:/xampp/htdocs/sigefica/gerador-ficha/FichaCatalografica.docx'; // Modificar para o seu
 
-app.get('/excluirArquivo', (req, res) => { 
+// app.get('/excluirArquivo', (req, res) => { 
 
-    fs.unlink(diretorioArquivo, (err) => {
-        if (err) {
-          console.error('Ocorreu um erro ao excluir o arquivo:', err);
-          return;
-        }
-        console.log('Arquivo excluído com sucesso!');
-    });
+//     fs.unlink(diretorioArquivo, (err) => {
+//         if (err) {
+//           console.error('Ocorreu um erro ao excluir o arquivo:', err);
+//           return;
+//         }
+//         console.log('Arquivo excluído com sucesso!');
+//     });
 
-});
+// });
 
 const definirPorta = 3000;
 

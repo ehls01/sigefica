@@ -13,10 +13,10 @@
         <a class="pag-tutorial" href="./tutorial.html">Tutorial</a>
     </header>
 
-    <div class="container">
+    <main class="container">
         <form class="sigefica" onsubmit="puxarInfos(event)" method="post">
             <div class="input-group">
-                <h2>Informações Básicas</h2><hr>
+                <h2>Informações Básicas</h2><hr> </br>
                 <div class="input-box">
                     <label for="nomeAluno">Nome:</label><br>
                     <input class="input" id="nomeAluno" type="text" name="nomeAluno" placeholder="Nome do aluno" required><br>
@@ -54,11 +54,15 @@
                         <option value="eletro">--Eletrotécnica--</option>
                         <option value="edifica">--Edificações--</option>
                     </select><br><br>
+
+                    <label for="titulo">E-Mail:</label><br>
+                    <input class="input" id="email" type="email" name="email" placeholder="E-Mail do aluno" required><br><br>
+                    <span>Esse email será usado para receber a ficha revisada pela bibliotecária</span><br><br>
                 </div>
             </div>
 
             <div class="input-group">
-                <h2>Dados do Orientador</h2><hr>
+                <h2>Dados do Orientador</h2><hr> </br>
                 <div class="input-box">
                     <label for="nomeOrientador">Nome:</label><br>
                     <input class="input" id="nomeOrientador" type="text" name="nomeOrientador" placeholder="Nome do Orientador" required><br><br>
@@ -74,7 +78,7 @@
             </div>
 
             <div class="input-group">
-                <h2>Palavras Chave</h2><hr>
+                <h2>Palavras Chave</h2><hr> </br>
                 <p>Caso tenha menos que 5 palavras, deixar em branco</p>
 
                 <br>
@@ -113,23 +117,23 @@
             </div>
 
             <div class="input-group">
-                <h2>Outras Informações</h2><hr>
+                <h2>Outras Informações</h2><hr> </br>
                 <div class="input-box">
                     <label for="localPublicacao">Local:</label><br>
-                    <input class="input" id="localPublicacao" type="text" name="localPublicacao" placeholder="Informe o local" required>
-                    <input class="button" type="button" value="Adicionar outro local"><br><br>
+                    <input class="input" id="localPublicacao" type="text" name="localPublicacao" placeholder="Informe o local" required> </br></br></br>
+                    <!-- <input class="button" type="button" value="Adicionar outro local"><br><br> -->
     
                     <label for="anoPublicacao">Ano de publicação:</label>
                     <!-- <input class="input" id="anoPublicacao" type="number" name="anoPublicacao" placeholder="2023" required><br><br> -->
                     <select name="anoPublicacao" id="anoPublicacao">
-                        <option value="selecioneAno">Selecione o ano</option>
+                        <!-- <option value="selecioneAno">Selecione o ano</option> -->
                         <?php
-                            $anoInicial = 2000;
-                            $anoAtual = intval(date("Y"));
+                            $anoFinal = 2000;
+                            $anoInicial = intval(date("Y"));
 
-                            while ($anoInicial <= $anoAtual) {
+                            while ($anoInicial >= $anoFinal) {
                                 print "<option value=\"$anoInicial\">$anoInicial</option>";
-                                $anoInicial +=1;
+                                $anoInicial -= 1;
                             }
                         ?>
                     </select>
@@ -138,13 +142,13 @@
                     <br>
 
                     <label for="numeroPaginas">Número de Páginas:</label>
-                    <input id="numeroPaginas" class="input" type="number" placeholder="100" required><br><br>
+                    <input id="numeroPaginas" class="input" type="number" placeholder="100" required min="0"><br><br>
                 </div>
             </div>
 
             <input class="button" type="submit" value="Gerar Ficha Catalográfica" required>
         </form>
-    </div>
+    </main>
 
     <footer>
         <img class="logo-ifrn" src="./assets/imgs/logo-ifrn.png" alt="logo-ifrn">
@@ -170,6 +174,7 @@
             const tituloTrabalho = document.getElementById("titulo").value;
             const tipoTrabalho = document.getElementById("tipoTrabalho").value;
             const curso = document.getElementById("curso").value;
+            const emailAluno =document.getElementById("email").value;
             const nomeOrientador = document.getElementById("nomeOrientador").value;
             const titulacao = document.getElementById("titulacao").value;
             const palavraChave1 = document.getElementById("palavraChave1").value;
@@ -220,6 +225,7 @@
                 jobTitle: tituloTrabalho,
                 jobType: tipoTrabalho,
                 curse: curso,
+                studentEmail: emailAluno,
                 poName: nomeOrientador,
                 titulation: titulacao,
                 keyWord1: palavraChave1,
@@ -247,9 +253,11 @@
                 console.error('Erro:', error);
             });
 
-            const diretorioDownload = "./gerador-ficha/FichaCatalografica.docx";
+            // const diretorioDownload = "./gerador-ficha/FichaCatalografica.docx";
 
-            window.location.href = `./downloadPage.php?diretorio=${diretorioDownload}`;
+            // window.location.href = `./downloadPage.php?diretorio=${diretorioDownload}`;
+
+            window.location.href = "./deubom.html";
         }
     </script>
 </body>
