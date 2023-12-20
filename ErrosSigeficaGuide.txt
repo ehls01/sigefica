@@ -1,0 +1,110 @@
+---===[ ERROS DO SIGEFICA ]===---
+
+----- erro200 -----
+
+Desc: É a primeira verificação de erro do sistema e também é um dos mais perigosos
+pois trata-se dos possiveis erros:
+
+- Erro na hora de carregar dados do usuário;
+- Erro ao gerar ficha catalográfica;
+- Erro na hora de enviar o email.
+
+O.B.S.: Nos testes, foi constatado que, quando esse erro ocorre, quase sempre
+o problema está apenas na hora de enviar e-mail, então é recomendado iniciar o
+debug por lá, porém não é bom descartar os outros motivos.
+
+Verificar: Desde o array de carregamento de dados até a const construirEmail.
+
+
+
+----- erro202 -----
+
+Desc: Erro ao startar o servidor.
+
+Verificar: porta usada no servidor, verificar o app.listen no final do código.
+
+
+
+----- erro204 -----
+
+!PERIGOSO!
+
+Desc: Erro ao excluir a ficha gerada naquele momento. Esse erro pode impedir que
+o sistema gere uma nova ficha para aquele aluno.
+
+!IMPORTANTE! --> ESSE ERRO É MOSTRADO NO CONSOLE, NÃO É MOSTRADO AO USUÁRIO!
+Por esse motivo é importante sempre verificar o console do sistema, pra não
+ocorrer o problema de sobrecarga no sistema.
+
+Verificar: Pasta gerador-ficha no diretório do sistema.
+
+
+
+----- erro206 -----
+
+!DIFÍCIL DE CONSERTAR!
+
+Desc: Esse erro pode aparecer se qualquer processo durante a geração da ficha, seu
+envio e sua exclusão, falhar. Se isso acontecer, é recomendado parar a execução do
+sistema, e verificar todo o código a partir do app.post('/receberDados').
+
+!IMPORTANTE! --> Esse erro é relativamente dificil de aparecer, pois, se os erros 200 e
+204 forem mostrados, impedem de o processo de execução chegar até o erro 206. Isso pode
+facilitar o processo de debug, pois se esse erro aparecer, é recomendado verificar primeiro
+se a ficha está sendo gerada corretamente.
+
+Verificar: Todo o sistema a partir do app.post('/receberDados').
+
+
+
+------===[ RECOMENDAÇÕES GERAIS ]===------ 
+
+O sistema utiliza-se de vários console.log por todo o código para retornar status de
+processamento. Com isso, o dev que estiver tentando resolver um bug, pode utilizar 
+esses status para descartar possíveis erros e corrigir problemas de forma mais
+eficiênte.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Autoria: DerickCarvalho -> 2023.2

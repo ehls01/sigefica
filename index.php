@@ -8,17 +8,17 @@
     <title>Sigefica</title>
 </head>
 <body>
-    <header class="navbar">
+    <header id="topPage" class="navbar">
         <img src="./assets/imgs/logo-if.png" alt="logo-ifrn" width="6%">
         <h1>Sigefica - Sistema Gerador de Ficha Catalográfica</h1>
         <a class="pag-tutorial" href="./tutorial.html">Tutorial</a>
     </header>
 
-    <div id="sucess" class="successMessage">
+    <div id="success" class="successMessage fade hidden">
         <h1>FICHA GERADA COM SUCESSO E ENVIADA PARA BIBLIOTECA! FIQUE ATENTO AO SEU EMAIL!</h1>
     </div>
 
-    <div id="unsuccess" class="unsuccessMessage">
+    <div id="unsuccess" class="unsuccessMessage fade hidden">
         <h1>HOUVE UM ERRO AO GERAR SUA FICHA! TENTE NOVAMENTE MAIS TARDE!</h1>
     </div>
 
@@ -130,6 +130,7 @@
                 <div class="input-box">
                     <label for="localPublicacao">Cidade:</label><br>
                     <input class="input" id="localPublicacao" type="text" name="localPublicacao" placeholder="Informe a cidade da instituição" required> </br></br></br>
+                    <span>Não adicionar estado!</span><br><br>
                     <!-- <input class="button" type="button" value="Adicionar outro local"><br><br> -->
     
                     <label for="anoPublicacao">Ano de publicação:</label>
@@ -178,19 +179,20 @@
             event.preventDefault(); // Desativa o comportamento padrão do formulário
 
             // Puxando os alertas de sucesso ou falha
-            const success = document.getElementById('sucess');
-            const unsuccess = document.getElementById('unsucess');
+            let topPage = document.getElementById('topPage');
+            let success = document.getElementById('success');
+            let unsuccess = document.getElementById('unsucess');
             
             // Carregar informações do formulário:
-            const nomeAluno = document.getElementById("nomeAluno").value;
-            const sobrenomeAluno = document.getElementById("sobrenomeAluno").value;
-            const tituloTrabalho = document.getElementById("titulo").value;
-            const tipoTrabalho = document.getElementById("tipoTrabalho").value;
-            const curso = document.getElementById("curso").value;
-            const emailAluno =document.getElementById("email").value;
-            const nomeOrientador = document.getElementById("nomeOrientador").value;
-            const titulacao = document.getElementById("titulacao").value;
-            const palavraChave1 = document.getElementById("palavraChave1").value;
+            let nomeAluno = document.getElementById("nomeAluno").value;
+            let sobrenomeAluno = document.getElementById("sobrenomeAluno").value;
+            let tituloTrabalho = document.getElementById("titulo").value;
+            let tipoTrabalho = document.getElementById("tipoTrabalho").value;
+            let curso = document.getElementById("curso").value;
+            let emailAluno =document.getElementById("email").value;
+            let nomeOrientador = document.getElementById("nomeOrientador").value;
+            let titulacao = document.getElementById("titulacao").value;
+            let palavraChave1 = document.getElementById("palavraChave1").value;
 
             // Formatando palavras chave
             let palavraChave2 = document.getElementById("palavraChave2").value;
@@ -212,9 +214,9 @@
             if (palavraChave5 != "") {
                 palavraChave5 = "5. " + document.getElementById("palavraChave5").value + ".";
             }
-            const localPublicacao = document.getElementById("localPublicacao").value;
-            const anoPublicacao = document.getElementById("anoPublicacao").value;
-            const numeroPaginas = document.getElementById("numeroPaginas").value;
+            let localPublicacao = document.getElementById("localPublicacao").value;
+            let anoPublicacao = document.getElementById("anoPublicacao").value;
+            let numeroPaginas = document.getElementById("numeroPaginas").value;
 
             // PRA QUE SERVEM
             // TANTOS CÓDIGOS
@@ -261,11 +263,177 @@
             .then(response => response.text())
             .then(message => {
                 console.log('Resposta do servidor:', message);
-                success.style.display = 'flex';
+                if (message == "erro 200") {
+                    // Limpando campos
+                    document.getElementById("nomeAluno").value = "";
+                    document.getElementById("sobrenomeAluno").value = "";
+                    document.getElementById("titulo").value = "";
+                    document.getElementById("tipoTrabalho").value = "";
+                    document.getElementById("curso").value = "";
+                    document.getElementById("email").value = "";
+                    document.getElementById("nomeOrientador").value = "";
+                    document.getElementById("titulacao").value = "";
+                    document.getElementById("palavraChave1").value = "";
+                    document.getElementById("palavraChave2").value = "";
+                    document.getElementById("palavraChave3").value = "";
+                    document.getElementById("palavraChave4").value = "";
+                    document.getElementById("palavraChave5").value = "";
+                    document.getElementById("localPublicacao").value = "";
+                    document.getElementById("anoPublicacao").value = "";
+                    document.getElementById("numeroPaginas").value = 0;
+                    
+                    topPage.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start',
+                    });
+
+                    unsuccess.style.display = 'flex';
+                    setTimeout(() => {              
+                        unsuccess.classList.remove('hidden');      
+                    }, 250);                    
+
+                    setTimeout(() => {
+                        unsuccess.classList.add('hidden');                  
+                    }, 3000);
+
+                    setTimeout(() => {
+                        unsuccess.style.display = 'none';
+                    }, 3500);  
+                }
+                else if (message == "erro204") {
+                    // Limpando campos
+                    document.getElementById("nomeAluno").value = "";
+                    document.getElementById("sobrenomeAluno").value = "";
+                    document.getElementById("titulo").value = "";
+                    document.getElementById("tipoTrabalho").value = "";
+                    document.getElementById("curso").value = "";
+                    document.getElementById("email").value = "";
+                    document.getElementById("nomeOrientador").value = "";
+                    document.getElementById("titulacao").value = "";
+                    document.getElementById("palavraChave1").value = "";
+                    document.getElementById("palavraChave2").value = "";
+                    document.getElementById("palavraChave3").value = "";
+                    document.getElementById("palavraChave4").value = "";
+                    document.getElementById("palavraChave5").value = "";
+                    document.getElementById("localPublicacao").value = "";
+                    document.getElementById("anoPublicacao").value = "";
+                    document.getElementById("numeroPaginas").value = 0;
+                    
+                    topPage.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start',
+                    });
+
+                    unsuccess.style.display = 'flex';
+                    setTimeout(() => {              
+                        unsuccess.classList.remove('hidden');      
+                    }, 250);                    
+
+                    setTimeout(() => {
+                        unsuccess.classList.add('hidden');                  
+                    }, 3000);
+
+                    setTimeout(() => {
+                        unsuccess.style.display = 'none';
+                    }, 3500);  
+                } 
+                else if (message == "erro206") {
+                    // Limpando campos
+                    document.getElementById("nomeAluno").value = "";
+                    document.getElementById("sobrenomeAluno").value = "";
+                    document.getElementById("titulo").value = "";
+                    document.getElementById("tipoTrabalho").value = "";
+                    document.getElementById("curso").value = "";
+                    document.getElementById("email").value = "";
+                    document.getElementById("nomeOrientador").value = "";
+                    document.getElementById("titulacao").value = "";
+                    document.getElementById("palavraChave1").value = "";
+                    document.getElementById("palavraChave2").value = "";
+                    document.getElementById("palavraChave3").value = "";
+                    document.getElementById("palavraChave4").value = "";
+                    document.getElementById("palavraChave5").value = "";
+                    document.getElementById("localPublicacao").value = "";
+                    document.getElementById("anoPublicacao").value = "";
+                    document.getElementById("numeroPaginas").value = 0;
+                    
+                    topPage.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start',
+                    });
+
+                    unsuccess.style.display = 'flex';
+                    setTimeout(() => {              
+                        unsuccess.classList.remove('hidden');      
+                    }, 250);                    
+
+                    setTimeout(() => {
+                        unsuccess.classList.add('hidden');                  
+                    }, 3000);
+
+                    setTimeout(() => {
+                        unsuccess.style.display = 'none';
+                    }, 3500);       
+                } else {
+                    //Limpando campos
+                    document.getElementById("nomeAluno").value = "";
+                    document.getElementById("sobrenomeAluno").value = "";
+                    document.getElementById("titulo").value = "";
+                    document.getElementById("tipoTrabalho").value = 0;
+                    document.getElementById("curso").value = 0;
+                    document.getElementById("email").value = "";
+                    document.getElementById("nomeOrientador").value = "";
+                    document.getElementById("titulacao").value = 0;
+                    document.getElementById("palavraChave1").value = "";
+                    document.getElementById("palavraChave2").value = "";
+                    document.getElementById("palavraChave3").value = "";
+                    document.getElementById("palavraChave4").value = "";
+                    document.getElementById("palavraChave5").value = "";
+                    document.getElementById("localPublicacao").value = "";
+                    document.getElementById("anoPublicacao").value = 0;
+                    document.getElementById("numeroPaginas").value = "";
+
+                    // Scrollando para o topo da pagina
+                    topPage.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start',
+                    });
+                    
+                    // Mostrando mensagem de conclusão     
+                    success.style.display = 'flex';
+                    setTimeout(() => {              
+                        success.classList.remove('hidden');      
+                    }, 250);                   
+
+                    // Removendo menssagem após um tempo
+                    setTimeout(() => {
+                        success.classList.add('hidden');        
+                    }, 3000);     
+                    
+                    setTimeout(() => {                              
+                        success.style.display = 'none'; 
+                    }, 3500);
+                }
             })
             .catch(error => {
                 console.error('Erro:', error);
+
+                topPage.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                });
+
                 unsuccess.style.display = 'flex';
+                setTimeout(() => {              
+                    unsuccess.classList.remove('hidden');      
+                }, 250);                    
+
+                setTimeout(() => {
+                    unsuccess.classList.add('hidden');                  
+                }, 3000);
+
+                setTimeout(() => {
+                    unsuccess.style.display = 'none';
+                }, 3500);
             });
         }
     </script>
