@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/estiloForm.css">
+    <link rel="icon" href="./assets/imgs/logo-if.png">
     <title>Sigefica</title>
 </head>
 <body>
@@ -12,6 +13,14 @@
         <h1>Sigefica - Sistema Gerador de Ficha Catalográfica</h1>
         <a class="pag-tutorial" href="./tutorial.html">Tutorial</a>
     </header>
+
+    <div id="sucess" class="successMessage">
+        <h1>FICHA GERADA COM SUCESSO E ENVIADA PARA BIBLIOTECA! FIQUE ATENTO AO SEU EMAIL!</h1>
+    </div>
+
+    <div id="unsuccess" class="unsuccessMessage">
+        <h1>HOUVE UM ERRO AO GERAR SUA FICHA! TENTE NOVAMENTE MAIS TARDE!</h1>
+    </div>
 
     <main class="container">
         <form class="sigefica" onsubmit="puxarInfos(event)" method="post">
@@ -27,13 +36,13 @@
                     <span>Ex.: Para o nome João Pedro de Oliveira, digitar Oliveira.</span><br><br>
 
                     <label for="titulo">Título:</label><br>
-                    <input class="input" id="titulo" type="text" name="titulo" placeholder="Sobrenome do aluno" required><br><br>
+                    <input class="input" id="titulo" type="text" name="titulo" placeholder="Título do Trabalho" required><br><br>
 
                     <!-- <label for="codigoCutter">Código Cutter:</label><br>
                     <input class="input" id="codigoCutter" type="text" name="codigoCutter" placeholder="Sobrenome do aluno" required><br><br> -->
 
                     <label for="tipoTcc">Tipo de Trabalho:</label><br>
-                    <select id="tipoTrabalho" required>
+                    <select class="input" id="tipoTrabalho" required>
                         <option value="selectCurso">--Selecionar Tipo de Trabalho--</option>
                         <option value="tccTecnico">TCC (Técnico)</option>
                         <option value="tccGraduacao">TCC (Graduação)</option>
@@ -47,7 +56,7 @@
                     </select><br><br>
 
                     <label for="curso">Curso:</label><br>
-                    <select id="curso">
+                    <select class="input" id="curso">
                         <option value="selectCurso">--Selecionar Curso--</option>
                         <option value="info">--Informática--</option>
                         <option value="mec">--Mecânica--</option>
@@ -68,7 +77,7 @@
                     <input class="input" id="nomeOrientador" type="text" name="nomeOrientador" placeholder="Nome do Orientador" required><br><br>
 
                     <label for="titulacao">Titulação</label><br>
-                    <select id="titulacao" required>
+                    <select class="input" id="titulacao" required>
                         <option value="selectTitulacao">--Selecionar Titulação--</option>
                         <option value="especialista">Especialista</option>
                         <option value="mestre">Mestre(a)</option>
@@ -119,13 +128,13 @@
             <div class="input-group">
                 <h2>Outras Informações</h2><hr> </br>
                 <div class="input-box">
-                    <label for="localPublicacao">Local:</label><br>
-                    <input class="input" id="localPublicacao" type="text" name="localPublicacao" placeholder="Informe o local" required> </br></br></br>
+                    <label for="localPublicacao">Cidade:</label><br>
+                    <input class="input" id="localPublicacao" type="text" name="localPublicacao" placeholder="Informe a cidade da instituição" required> </br></br></br>
                     <!-- <input class="button" type="button" value="Adicionar outro local"><br><br> -->
     
                     <label for="anoPublicacao">Ano de publicação:</label>
                     <!-- <input class="input" id="anoPublicacao" type="number" name="anoPublicacao" placeholder="2023" required><br><br> -->
-                    <select name="anoPublicacao" id="anoPublicacao">
+                    <select class="input" name="anoPublicacao" id="anoPublicacao">
                         <!-- <option value="selecioneAno">Selecione o ano</option> -->
                         <?php
                             $anoFinal = 2000;
@@ -167,6 +176,10 @@
     <script>
         function puxarInfos(event) {
             event.preventDefault(); // Desativa o comportamento padrão do formulário
+
+            // Puxando os alertas de sucesso ou falha
+            const success = document.getElementById('sucess');
+            const unsuccess = document.getElementById('unsucess');
             
             // Carregar informações do formulário:
             const nomeAluno = document.getElementById("nomeAluno").value;
@@ -248,16 +261,12 @@
             .then(response => response.text())
             .then(message => {
                 console.log('Resposta do servidor:', message);
+                success.style.display = 'flex';
             })
             .catch(error => {
                 console.error('Erro:', error);
+                unsuccess.style.display = 'flex';
             });
-
-            // const diretorioDownload = "./gerador-ficha/FichaCatalografica.docx";
-
-            // window.location.href = `./downloadPage.php?diretorio=${diretorioDownload}`;
-
-            window.location.href = "./deubom.html";
         }
     </script>
 </body>

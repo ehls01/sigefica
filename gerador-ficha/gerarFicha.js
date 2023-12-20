@@ -105,15 +105,6 @@ app.post('/receberDados', (req, res) => {
             ]
         };
 
-        // // Enviando o e-mail
-        // dadosEmail.sendMail(construirEmail, (error, info) => {
-        //     if (error) {
-        //         res.status(500).send('Erro ao enviar o e-mail: ' + error.message);
-        //     } else {
-        //         res.send('E-mail enviado com sucesso para ' + construirEmail.to);
-        //     }
-        // });
-
         try {
             transporter.sendMail(construirEmail);
             console.log(`Email enviado com sucesso para a bibliotecária!`);
@@ -136,20 +127,6 @@ app.post('/receberDados', (req, res) => {
         res.send('Erro ao gerar e enviar ficha\n\nErro:', error);
     }
 });
-
-// const diretorioArquivo = 'C:/xampp/htdocs/sigefica/gerador-ficha/FichaCatalografica.docx'; // Modificar para o seu
-
-// app.get('/excluirArquivo', (req, res) => { 
-
-//     fs.unlink(diretorioArquivo, (err) => {
-//         if (err) {
-//           console.error('Ocorreu um erro ao excluir o arquivo:', err);
-//           return;
-//         }
-//         console.log('Arquivo excluído com sucesso!');
-//     });
-
-// });
 
 const definirPorta = 3000;
 
