@@ -137,22 +137,24 @@
                     <!-- <input class="input" id="anoPublicacao" type="number" name="anoPublicacao" placeholder="2023" required><br><br> -->
                     <select class="input" name="anoPublicacao" id="anoPublicacao">
                         <!-- <option value="selecioneAno">Selecione o ano</option> -->
-                        <?php
-                            $anoFinal = 2000;
-                            $anoInicial = intval(date("Y"));
+                        <!-- <?php
+                            // $anoFinal = 2000;
+                            // $anoInicial = intval(date("Y"));
 
-                            while ($anoInicial >= $anoFinal) {
-                                print "<option value=\"$anoInicial\">$anoInicial</option>";
-                                $anoInicial -= 1;
-                            }
-                        ?>
+                            // while ($anoInicial >= $anoFinal) {
+                            //     print "<option value=\"$anoInicial\">$anoInicial</option>";
+                            //     $anoInicial -= 1;
+                            // }
+                        ?> -->
+
+                        <option value="2023">2023</option>
                     </select>
 
                     <br>
                     <br>
 
                     <label for="numeroPaginas">Número de Páginas:</label>
-                    <input id="numeroPaginas" class="input" type="number" placeholder="100" required min="0"><br><br>
+                    <input id="numeroPaginas" class="input" type="number" placeholder="100" required min="0" max="200"><br><br>
                 </div>
             </div>
 
@@ -288,12 +290,12 @@
                     });
 
                     unsuccess.style.display = 'flex';
-                    setTimeout(() => {              
+                    setTimeout(() => {             
                         unsuccess.classList.remove('hidden');      
                     }, 250);                    
 
                     setTimeout(() => {
-                        unsuccess.classList.add('hidden');                  
+                        unsuccess.classList.add('hidden');              
                     }, 3000);
 
                     setTimeout(() => {

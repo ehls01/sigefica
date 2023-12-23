@@ -47,7 +47,7 @@ app.post('/receberDados', (req, res) => {
     console.log(`---===[ SIGEFICA INFORMA ]===---\n\nDados de ${completeName} carregados com sucesso!\n\n`);  
 
     const content = fs.readFileSync(
-        path.resolve(__dirname, "ficha-padrao.docx"),
+        path.resolve(__dirname, "ficha-padrao.docx"), // __dirname -> Puxa o nome do autor do arquivo base
         "binary"
     );
 
@@ -84,7 +84,7 @@ app.post('/receberDados', (req, res) => {
 
     try {
         fs.writeFileSync(path.resolve(__dirname, `FichaCatalografica - ${completeName}.docx`), buf);
-        console.log(`---===[ SIGEFICA INFORMA ]===---\n\nAluno: ${completeName}\n\nFICHA GERADA COM SUCESSO!\n\n`);        
+        console.log(`---===[ SIGEFICA INFORMA ]===---\n\nAluno: ${completeName}\n\nFICHA GERADA COM SUCESSO!\n\n`);
 
         //const emailBibliotecaria = "emanoelheron@gmail.com"; // Email de PRD -> Produção (Comentar caso for usar HOM)
         const emailBibliotecaria = "derickjesiel96@gmail.com"; // Email de HOM -> Homologação (Comentar caso for usar PRD)
@@ -95,7 +95,7 @@ app.post('/receberDados', (req, res) => {
             secure: false, // true para uso com SSL/TLS
             auth: {
               user: 'sigeficaifrn@gmail.com', // Seu endereço de e-mail
-              pass: 'NRwmqOtWxcFY9yVC' // Sua senha de e-mail
+              pass: 'NRwmqOtWxcFY9yVC' // Sua do brevo
             }
         });
 
@@ -146,5 +146,5 @@ try {
         console.log(`\n\n---===[ SIGEFICA INFORMA ]===---\n\nSistema executado com sucesso!\n\n------------------------------------------\n\nSistema rodando em: http://localhost:${definirPorta}\n\n`);
     });
 } catch (error) {
-    console.log('---===[ SIGEFICA INFORMA ]===---\n\n--- ERRO 206 ---\n\nErro ao startar o servidor!');
+    console.log('---===[ SIGEFICA INFORMA ]===---\n\n--- ERRO 202 ---\n\nErro ao startar o servidor!');
 }
