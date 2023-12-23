@@ -141,10 +141,11 @@ app.post('/receberDados', (req, res) => {
 
 const definirPorta = 3000;
 
-try {
-    app.listen(definirPorta, () => {
-        console.log(`\n\n---===[ SIGEFICA INFORMA ]===---\n\nSistema executado com sucesso!\n\n------------------------------------------\n\nSistema rodando em: http://localhost:${definirPorta}\n\n`);
-    });
-} catch (error) {
-    console.log('---===[ SIGEFICA INFORMA ]===---\n\n--- ERRO 202 ---\n\nErro ao startar o servidor!');
-}
+app.listen(definirPorta, (err) => {
+    if (err) {
+        console.log("deu madeira");
+        return;
+    }
+    
+    console.log(`\n\n---===[ SIGEFICA INFORMA ]===---\n\nSistema executado com sucesso!\n\n------------------------------------------\n\nSistema rodando em: http://localhost:${definirPorta}\n\n`);
+});
