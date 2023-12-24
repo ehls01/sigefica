@@ -29,6 +29,49 @@
 }
 
 /* ===== ESTILIZAÇÃO DO CORPO ===== */
+/* 
+.fade {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+.fade.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.successMessage {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.successMessage h1{
+    box-shadow: 5px 5px 10px rgb(118, 145, 91);
+    background-color: rgb(243, 255, 231);
+    border: solid 1px #c0c4c0;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 20px;
+}
+
+.unsuccessMessage {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.unsuccessMessage h1 {
+    box-shadow: 5px 5px 10px rgb(145, 91, 91);
+    background-color: rgb(252, 209, 209);
+    border: solid 1px #ffa5a5;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 20px;
+} */
 
 .sigefica{
     background-color: rgb(243, 255, 231);
@@ -49,10 +92,7 @@
     padding: 1% 0;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="number"]
-input[type="data"] {
+.input {
     width: 100%;
     padding: 2%;
     border: 1px solid #ccc;
@@ -61,6 +101,7 @@ input[type="data"] {
 
 .input:focus {
     border-color: #298f15;
+    outline: 0;
     box-shadow: 0 0 5px #298f15;
 }
 

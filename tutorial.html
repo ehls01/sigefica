@@ -1,20 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/estiloForm.css">
-    <title>Tutorial</title>
+    <link rel="stylesheet" href="./assets/css/tutorial.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/DerickCarvalho/DkStrap@main/DkStrap.css">
+    <link rel="icon" href="./assets/imgs/logo-if.png">
+    <title>Sigefica - Tutorial</title>
 </head>
 <body>
 <header class="navbar">
-    <img src="./assets/imgs/logo-if.png" alt="logo-ifrn" width="6%">
-    <a class="pag-tutorial" href="./index.html">Página Inicial</a>
+    <img src="./assets/imgs/logo-if.png" alt="logo-ifrn">
+    <h1>Sigefica - Tutorial de uso</h1>
+    <a class="pag-tutorial" href="./index.php">Página Inicial</a>
 </header>
 
-<div class="pdf-container">
-    <object class="pdf-object" data="./assets/Baía-de-Guanabara-Capítulo-de-livro-Final.pdf" type="application/pdf"></object>
-</div>
+<main class="flex-column-center">
+    <section class="tutorialList padding-25px flex-column-center">
+        <div class="flex-column-left width-75">
+            <h1 class="padding-25px width-100 text-center">Área → Informações Básicas</h1>
+            <img src="./assets/imgs/prints-tutorial/basic-infos.png" alt="">
+        
+            <div class="tutorialInfos">
+                <h3>Instruções</h3>
+                <ul>
+                    <li>Nome → Digite seu nome, deixando de fora apenas o último sobrenome, exemplo: João Pedro de Oliveia → João Pedro de</li>
+                    <li>Sobrenome → Aqui sim você digita seu sobrenome, exempl: João Pedro de Oliveira → Oliveira</li>
+                    <li>Título → Digite o título completo do trabalho</li>
+                    <li>Tipo de trabalho → Selecione a opção que mais condiz com o tipo do seu trabalho</li>
+                    <li>Curso → Selecione seu curso</li>
+                    <li>Email → Informe um email, esse email será usado para o envio da ficha catalográfica revisada</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="flex-column-left width-75">
+            <h1 class="padding-25px width-100 text-center">Área → Dados do Orientador</h1>
+            <img src="./assets/imgs/prints-tutorial/po-data.png" alt="">
+        
+            <div class="tutorialInfos">
+                <h3>Instruções</h3>
+                <ul>
+                    <li>Nome do Orientador → Digite o nome do orientador do seu projeto</li>
+                    <li>Titulação → Selecione a opção que condiz com a titulação do seu orientador</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="flex-column-left width-75">
+            <h1 class="padding-25px width-100 text-center">Área → Palavras Chave</h1>
+            <img src="./assets/imgs/prints-tutorial/key-words.png" alt="">
+        
+            <div class="tutorialInfos">
+                <h3>Instruções</h3>
+                <ul>
+                    <li>Campos → Cada campo equivale a SOMENTE UMA palavra chave</li>
+                    <li>Quantidade → A quantidade mínima de palavras chave é 1, e a máxima é 5 → Caso seu trabalho possua menos de 5, 
+                        deixar os demais campos em BRANCO</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="flex-column-left width-75">
+            <h1 class="padding-25px width-100 text-center">Área → Palavras Chave</h1>
+            <img src="./assets/imgs/prints-tutorial/other-informations.png" alt="">
+        
+            <div class="tutorialInfos">
+                <h3>Instruções</h3>
+                <ul>
+                    <li>Cidade → Digite a cidade onde fica a instituição</li>
+                    <li>Ano de publicação → Selecione o ano em que seu trabalho será publicado</li>
+                    <li>Número de páginas → Digite a quantidade de páginas que seu trabalho possui</li>
+                    <li>Gerar ficha → Pronto! Clique neste botão para verificar se nenhum campo está em branco, 
+                        caso tenha preenchido tudo, o sistema gerará a ficha e enviará para a bibliotecária! Fique 
+                        atento ao seu email para receber o retorno da ficha!</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+</main>
 
 <footer>
     <img class="logo-ifrn" src="./assets/imgs/logo-ifrn.png" alt="logo-ifrn">
@@ -24,6 +89,7 @@
         <p>Francisco Jordel</p>
         <p>Maria Eduarda</p>
         <p>Pedro Lucas</p>
+        <a href="https://github.com/DerickCarvalho">Derick Carvalho -> API</a>
     </div>
     <p>@Sigefica</p>
     <p>2023</p>

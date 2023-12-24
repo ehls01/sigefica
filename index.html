@@ -4,19 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/estiloForm.css">
+    <link rel="icon" href="./assets/imgs/logo-if.png">
     <title>Sigefica</title>
 </head>
 <body>
-    <header class="navbar">
+    <header id="topPage" class="navbar">
         <img src="./assets/imgs/logo-if.png" alt="logo-ifrn" width="6%">
         <h1>Sigefica - Sistema Gerador de Ficha Catalográfica</h1>
         <a class="pag-tutorial" href="./tutorial.html">Tutorial</a>
     </header>
+<!-- 
+    <div id="success" class="successMessage fade hidden">
+        <h1>FICHA GERADA COM SUCESSO E ENVIADA PARA BIBLIOTECA! FIQUE ATENTO AO SEU EMAIL!</h1>
+    </div>
 
-    <div class="container">
+    <div id="unsuccess" class="unsuccessMessage fade hidden">
+        <h1>HOUVE UM ERRO AO GERAR SUA FICHA! TENTE NOVAMENTE MAIS TARDE!</h1>
+    </div> -->
+
+    <main class="container">
         <form class="sigefica" onsubmit="puxarInfos(event)" method="post">
             <div class="input-group">
-                <h2>Informações Básicas</h2><hr>
+                <h2>Informações Básicas</h2><hr> </br>
                 <div class="input-box">
                     <label for="nomeAluno">Nome:</label><br>
                     <input class="input" id="nomeAluno" type="text" name="nomeAluno" placeholder="Nome do aluno" required><br>
@@ -27,44 +36,42 @@
                     <span>Ex.: Para o nome João Pedro de Oliveira, digitar Oliveira.</span><br><br>
 
                     <label for="titulo">Título:</label><br>
-                    <input class="input" id="titulo" type="text" name="titulo" placeholder="Sobrenome do aluno" required><br><br>
+                    <input class="input" id="titulo" type="text" name="titulo" placeholder="Título do Trabalho" required><br><br>
 
                     <!-- <label for="codigoCutter">Código Cutter:</label><br>
                     <input class="input" id="codigoCutter" type="text" name="codigoCutter" placeholder="Sobrenome do aluno" required><br><br> -->
 
                     <label for="tipoTcc">Tipo de Trabalho:</label><br>
-                    <select id="tipoTrabalho" required>
-                        <option value="selectCurso">--Selecionar Tipo de Trabalho--</option>
-                        <option value="tccTecnico">TCC (Técnico)</option>
-                        <option value="tccGraduacao">TCC (Graduação)</option>
-                        <option value="tccEspecializacao">TCC (Especialização)</option>
-                        <option value="mestradoAcademicoE">Mestrado Acadêmico em Ensino</option>
-                        <option value="mestradoAcademicoEP">Mestrado Acadêmico em Educação Profissional</option>
-                        <option value="mestradoProfissionalEF">Mestrado Profissional em Ensino de Física</option>
-                        <option value="mestradoProfissionalEPT">Mestrado Profissional em Educação Profissional e Tecnológica</option>
-                        <option value="mestradoProfissionalUSR">Mestrado Profissional em Uso Sustentável dos Recursos Naturais</option>
-                        <option value="doutoradoAcademicoEP">Doutorado Acadêmico em Educação Profissional</option>
+                    <select class="input" id="tipoTrabalho" required>
+                        <option value="selectCurso">Selecionar Tipo de Trabalho</option>
+                        <option value="tccTecnico">Trabalho de conclusão de curso(TCC)</option>
+                        <option value="dissetacao">Dissertação</option>
+                        <option value="tese">Tese</option>
                     </select><br><br>
 
                     <label for="curso">Curso:</label><br>
-                    <select id="curso">
-                        <option value="selectCurso">--Selecionar Curso--</option>
-                        <option value="info">--Informática--</option>
-                        <option value="mec">--Mecânica--</option>
-                        <option value="eletro">--Eletrotécnica--</option>
-                        <option value="edifica">--Edificações--</option>
+                    <select class="input" id="curso">
+                        <option value="selectCurso">Selecionar Curso</option>
+                        <option value="gradMatematica">Graduação em Matemática</option>
+                        <option value="tecGestao">Tecnólogo em Gestão Ambiental</option>
+                        <option value="mestEnsino">Mestrado Acadêmico em Ensino</option>
+                        <option value="mestProfissional">Mestrado Profissional em Educação Profissional e Tecnológica</option>
                     </select><br><br>
+
+                    <label for="titulo">E-Mail:</label><br>
+                    <input class="input" id="email" type="email" name="email" placeholder="E-Mail do aluno" required><br><br>
+                    <span>Esse email será usado para receber a ficha revisada pela bibliotecária</span><br><br>
                 </div>
             </div>
 
             <div class="input-group">
-                <h2>Dados do Orientador</h2><hr>
+                <h2>Dados do Orientador</h2><hr> </br>
                 <div class="input-box">
                     <label for="nomeOrientador">Nome:</label><br>
                     <input class="input" id="nomeOrientador" type="text" name="nomeOrientador" placeholder="Nome do Orientador" required><br><br>
 
                     <label for="titulacao">Titulação</label><br>
-                    <select id="titulacao" required>
+                    <select class="input" id="titulacao" required>
                         <option value="selectTitulacao">--Selecionar Titulação--</option>
                         <option value="especialista">Especialista</option>
                         <option value="mestre">Mestre(a)</option>
@@ -74,42 +81,79 @@
             </div>
 
             <div class="input-group">
-                <h2>Palavras Chave</h2><hr>
+                <h2>Palavras Chave</h2><hr> </br>
+                <p>Caso tenha menos que 5 palavras, deixar em branco</p>
+
+                <br>
                 <div class="input-box">
-                    <span>Você pode adicionar até 5 palavras chave</span><br>
-                    <label for="palavrasChave">1</label>
-                    <input class="input" id="palavrasChave" type="text" name="palavrasChave" placeholder="Palavra chave 1" required>
-                    <input class="button" type="button" value="Adicionar outra palavra chave">
+                    <label for="palavraChave1">Palavra 1</label>
+                    <input class="input" id="palavraChave1" type="text" name="palavraChave1" placeholder="Palavra chave 1" required>
+                </div>
+
+                <br>
+
+                <div class="input-box">
+                    <label for="palavraChave2">Palavra 2</label>
+                    <input class="input" id="palavraChave2" type="text" name="palavraChave2" placeholder="Palavra chave 2" >
+                </div>
+
+                <br>
+
+                <div class="input-box">
+                    <label for="palavraChave3">Palavra 3</label>
+                    <input class="input" id="palavraChave3" type="text" name="palavraChave3" placeholder="Palavra chave 3" >
+                </div>
+
+                <br>
+
+                <div class="input-box">
+                    <label for="palavraChave4">Palavra 4</label>
+                    <input class="input" id="palavraChave4" type="text" name="palavraChave4" placeholder="Palavra chave 4" >
+                </div>
+
+                <br>
+
+                <div class="input-box">
+                    <label for="palavraChave5">Palavra 5</label>
+                    <input class="input" id="palavraChave5" type="text" name="palavraChave5" placeholder="Palavra chave 5" >
                 </div>
             </div>
 
             <div class="input-group">
-                <h2>Outras Informações</h2><hr>
+                <h2>Outras Informações</h2><hr> </br>
                 <div class="input-box">
-                    <label for="localPublicacao">Local:</label><br>
-                    <input class="input" id="localPublicacao" type="text" name="localPublicacao" placeholder="Informe o local" required>
-                    <input class="button" type="button" value="Adicionar outro local"><br><br>
-    
+                    <label for="localPublicacao">Cidade:</label><br>
+                    <input class="input" id="localPublicacao" type="text" name="localPublicacao" placeholder="Informe a cidade da instituição" required> </br><br>
+                    <label for="localPublicacao">instituição:</label> <br>
+                    <input class="input" id="localPublicacao" type="text" name="localPublicacao" placeholder="Informe a cidade da instituição" required> <br><br>
+                    
                     <label for="anoPublicacao">Ano de publicação:</label>
-                    <!-- <input class="input" id="anoPublicacao" type="number" name="anoPublicacao" placeholder="2023" required><br><br> -->
-                    <select name="anoPublicacao" id="anoPublicacao">
-                        <option value="selecioneAno">Selecione o ano</option>
-                        <option value="2000">2000</option>
-                        <option value="2001">2001</option>
-                        <option value="2002">2002</option>
-                        <option value="2003">2003</option>
-                        <option value="2004">2004</option>
-                        
-                    </select>
+                    <input class="input" id="anoPublicacao" type="number" name="anoPublicacao" placeholder="2023" max="2030" required><br>
+                    <!-- <select class="input" name="anoPublicacao" id="anoPublicacao"> -->
+                        <!-- <option value="selecioneAno">Selecione o ano</option> -->
+                        <!-- <?php
+                            // $anoFinal = 2000;
+                            // $anoInicial = intval(date("Y"));
+
+                            // while ($anoInicial >= $anoFinal) {
+                            //     print "<option value=\"$anoInicial\">$anoInicial</option>";
+                            //     $anoInicial -= 1;
+                            // }
+                        ?> -->
+                        <!-- <option value="2023">2023</option>
+                    </select> -->
+
+                    <br>
+                    <br>
 
                     <label for="numeroPaginas">Número de Páginas:</label>
-                    <input id="numeroPaginas" class="input" type="number" placeholder="100" required><br><br>
+                    <input id="numeroPaginas" class="input" type="number" placeholder="100" required min="0" max="200"><br><br>
                 </div>
             </div>
 
             <input class="button" type="submit" value="Gerar Ficha Catalográfica" required>
         </form>
-    </div>
+    </main>
 
     <footer>
         <img class="logo-ifrn" src="./assets/imgs/logo-ifrn.png" alt="logo-ifrn">
@@ -124,66 +168,7 @@
         <p>@Sigefica</p>
         <p>2023</p>
     </footer>
-    <script src="https://cdn.jsdelivr.net/gh/DerickCarvalho/cutterAPI/api.js"></script>
-    <script>
-        function puxarInfos(event) {
-            event.preventDefault(); // Desativa o comportamento padrão do formulário
-            
-            // Carregar informações do formulário:
-            const nomeAluno = document.getElementById("nomeAluno").value;
-            const sobrenomeAluno = document.getElementById("sobrenomeAluno").value;
-            const tituloTrabalho = document.getElementById("titulo").value;
-            const tipoTrabalho = document.getElementById("tipoTrabalho").value;
-            const curso = document.getElementById("curso").value;
-            const nomeOrientador = document.getElementById("nomeOrientador").value;
-            const titulacao = document.getElementById("titulacao").value;
-            const palavrasChave = document.getElementById("palavrasChave").value;
-            const localPublicacao = document.getElementById("localPublicacao").value;
-            const anoPublicacao = document.getElementById("anoPublicacao").value;
-            const numeroPaginas = document.getElementById("numeroPaginas").value;
-
-            // Criar código Cutter-Sanborn
-            const buscarCodigo = buscarMaisSimilar(data, sobrenomeAluno).codigo;
-
-            let primeiraLetraTrabalho = tituloTrabalho[0];
-            primeiraLetraTrabalho = primeiraLetraTrabalho.toLowerCase();
-
-            const cutterFinal = buscarCodigo + primeiraLetraTrabalho;
-
-            const informacoes = {
-                firstName: nomeAluno,
-                lastName: sobrenomeAluno,
-                cutter: cutterFinal,
-                jobTitle: tituloTrabalho,
-                jobType: tipoTrabalho,
-                curse: curso,
-                poName: nomeOrientador,
-                titulation: titulacao,
-                keyWords: palavrasChave,
-                pubLocate: localPublicacao,
-                yearPub: anoPublicacao,
-                numPag: numeroPaginas
-            };
-            
-            fetch('http://localhost:3000/receberDados', {
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(informacoes)
-            })
-            .then(response => response.text())
-            .then(message => {
-                console.log('Resposta do servidor:', message);
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-            });
-
-            const diretorioDownload = "./gerador-ficha/FichaCatalografica.docx";
-
-            window.location.href = `./downloadPage.php?diretorio=${diretorioDownload}`;
-        }
-    </script>
+    <script src="./assets/js/listaCutter.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>
