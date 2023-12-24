@@ -97,13 +97,15 @@ app.post('/receberDados', (req, res) => {
     const emailBibliotecaria = "emanoelheron@gmail.com"; // Email de PRD -> Produção (Comentar caso for usar HOM)
     //const emailBibliotecaria = "derickjesiel96@gmail.com"; // Email de HOM -> Homologação (Comentar caso for usar PRD)
 
+    // UTILIZANDO BREVO.COM PARA ENVIAR OS EMAIL'S
+
     const transporter = nodemailer.createTransport({
         host: 'smtp-relay.brevo.com', // Servidor SMTP
         port: 587, // Porta do servidor SMTP
         secure: false, // true para uso com SSL/TLS
         auth: {
           user: 'sigeficaifrn@gmail.com', // Seu endereço de e-mail
-          pass: 'NRwmqOtWxcFY9yVC' // Sua do brevo
+          pass: 'NRwmqOtWxcFY9yVC' // Senha do brevo
         }
     });
 
@@ -122,10 +124,14 @@ app.post('/receberDados', (req, res) => {
         ]
     };
     
+    // ENVIANDO O EMAIL
+
     transporter.sendMail(construirEmail);
 
+    // EXCLUINDO O ARQUIVO DA FICHA GERADA
+
     setTimeout(() => {
-        const diretorioArquivo = `C:/xampp/htdocs/sigefica/gerador-ficha/FichaCatalografica - ${completeName}.docx`; // Modificar para o seu
+        const diretorioArquivo = `C:/xampp/htdocs/sigefica/gerador-ficha/FichaCatalografica - ${completeName}.docx`;
         fs.unlink(diretorioArquivo, (err) => {
             if (err) {                
                 console.log("Erro ao excluir arquivo:", err);
@@ -137,7 +143,11 @@ app.post('/receberDados', (req, res) => {
     res.send('success');
 });
 
+// DEFINE A PORTA DO SERVIDOR
+
 const definirPorta = 3000;
+
+// MENSAGEM DE ERRO CASO O SERVIDOR NÃO SEJA INICIADO
 
 app.listen(definirPorta, (err) => {
     if (err) {
