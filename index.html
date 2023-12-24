@@ -35,7 +35,7 @@
                     <input class="input" id="sobrenomeAluno" type="text" name="sobrenomeAluno" placeholder="Sobrenome do aluno" required><br>
                     <span class="explicacao">Ex.: Para o nome João Pedro de Oliveira, digitar Oliveira.</span><br><br>
 
-                    <label for="titulo">E-Mail</label><br>
+                    <label for="titulo">E-mail</label><br>
                     <input class="input" id="email" type="email" name="email" placeholder="E-Mail do aluno" required><br>
                     <span class="explicacao">Esse email será usado para receber a ficha revisada pela bibliotecária</span><br><br>
                 </div>
@@ -72,7 +72,7 @@
                         <input class="input" id="localPublicacao" type="text" name="localPublicacao" placeholder="Ex.: Mossoró" required> </br></br>
         
                         <label for="anoPublicacao">Ano de publicação</label>
-                        <input class="input" id="anoPublicacao" type="number" name="anoPublicacao" placeholder="Ex.: 2023" required><br><br>
+                        <input class="input" id="anoPublicacao" type="number" max="2030" name="anoPublicacao" placeholder="Ex.: 2023" required><br><br>
     
                         <label for="numeroPaginas">Número de Páginas</label>
                         <input id="numeroPaginas" class="input" type="number" placeholder="Ex. 100" required min="0" max="200"><br><br>
@@ -80,7 +80,7 @@
             </div>
 
             <div class="input-group">
-                <h2>Palavras Chave</h2><hr> </br>
+                <h2>Palavras-Chave</h2><hr> </br>
                 <span class="explicacao">Adicione no mínimo 3 palavras-chave, e no máximo 5</span><br><br>
 
                 <div class="input-box">
@@ -113,7 +113,7 @@
                 <h2>Dados do Orientador</h2><hr> </br>
                 <div class="input-box">
                     <label for="nomeOrientador">Nome:</label><br>
-                    <input class="input" id="nomeOrientador" type="text" name="nomeOrientador" placeholder="Nome do Orientador" required><br><br>
+                    <input class="input" id="nomeOrientador" type="text" name="nomeOrientador" placeholder="Nome completo do Orientador" required><br><br>
 
                     <label for="titulacao">Titulação</label><br>
                     <select class="input" id="titulacao" required>
