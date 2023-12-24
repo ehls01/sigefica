@@ -83,16 +83,17 @@ function puxarInfos(event) {
     .then(response => response.text())
     .then(message => {
         console.log('Resposta do servidor:', message);        
+        
         if (message == "success") {
             //Limpando campos
             document.getElementById("nomeAluno").value = "";
             document.getElementById("sobrenomeAluno").value = "";
             document.getElementById("titulo").value = "";
-            document.getElementById("tipoTrabalho").value = selected;
+            document.getElementById("tipoTrabalho").selectedIndex = 0;
             document.getElementById("curso").value = 0;
             document.getElementById("email").value = "";
             document.getElementById("nomeOrientador").value = "";
-            document.getElementById("titulacao").value = selected;
+            document.getElementById("titulacao").selectedIndex = 0;
             document.getElementById("palavraChave1").value = "";
             document.getElementById("palavraChave2").value = "";
             document.getElementById("palavraChave3").value = "";
