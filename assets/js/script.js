@@ -83,46 +83,48 @@ function puxarInfos(event) {
     .then(response => response.text())
     .then(message => {
         console.log('Resposta do servidor:', message);        
-        //Limpando campos
-        document.getElementById("nomeAluno").value = "";
-        document.getElementById("sobrenomeAluno").value = "";
-        document.getElementById("titulo").value = "";
-        document.getElementById("tipoTrabalho").value = selected;
-        document.getElementById("curso").value = 0;
-        document.getElementById("email").value = "";
-        document.getElementById("nomeOrientador").value = "";
-        document.getElementById("titulacao").value = selected;
-        document.getElementById("palavraChave1").value = "";
-        document.getElementById("palavraChave2").value = "";
-        document.getElementById("palavraChave3").value = "";
-        document.getElementById("palavraChave4").value = "";
-        document.getElementById("palavraChave5").value = "";
-        document.getElementById("localPublicacao").value = "";
-        document.getElementById("anoPublicacao").value = 0;
-        document.getElementById("numeroPaginas").value = "";
-        document.getElementById("instituicao").value = "";
-        document.getElementById("localPublicacao").value = "";
+        if (message == "success") {
+            //Limpando campos
+            document.getElementById("nomeAluno").value = "";
+            document.getElementById("sobrenomeAluno").value = "";
+            document.getElementById("titulo").value = "";
+            document.getElementById("tipoTrabalho").value = selected;
+            document.getElementById("curso").value = 0;
+            document.getElementById("email").value = "";
+            document.getElementById("nomeOrientador").value = "";
+            document.getElementById("titulacao").value = selected;
+            document.getElementById("palavraChave1").value = "";
+            document.getElementById("palavraChave2").value = "";
+            document.getElementById("palavraChave3").value = "";
+            document.getElementById("palavraChave4").value = "";
+            document.getElementById("palavraChave5").value = "";
+            document.getElementById("localPublicacao").value = "";
+            document.getElementById("anoPublicacao").value = 0;
+            document.getElementById("numeroPaginas").value = "";
+            document.getElementById("instituicao").value = "";
+            document.getElementById("localPublicacao").value = "";
 
-        // Scrollando para o topo da pagina
-        topPage.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start',
-        });
-        
-        // Mostrando mensagem de conclusão     
-        success.style.display = 'flex';
-        setTimeout(() => {              
-            success.classList.remove('hidden');      
-        }, 250);                   
+            // Scrollando para o topo da pagina
+            topPage.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+            });
+            
+            // Mostrando mensagem de conclusão     
+            success.style.display = 'flex';
+            setTimeout(() => {              
+                success.classList.remove('hidden');      
+            }, 250);                   
 
-        // Removendo menssagem após um tempo
-        setTimeout(() => {
-            success.classList.add('hidden');        
-        }, 3000);     
-        
-        setTimeout(() => {                              
-            success.style.display = 'none'; 
-        }, 3500);
+            // Removendo menssagem após um tempo
+            setTimeout(() => {
+                success.classList.add('hidden');        
+            }, 3000);     
+            
+            setTimeout(() => {
+                success.style.display = 'none'; 
+            }, 3500);
+        }
     })
     .catch(error => {
         console.error('Erro:', error);
