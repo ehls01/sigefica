@@ -23,23 +23,27 @@ app.all('/', (req, res) => {
 app.post('/receberDados', (req, res) => {        
 
     const {
-        firstName,
-        lastName,
         cutter,
-        jobTitle,
-        jobType,
-        curse,
+        lastName,
+        firstName,
         studentEmail,
-        poName,
-        titulation,
+
+        workTitle,
+        workType,
+        course,
+        institute,
+        pubLocate,
+        yearPub,
+        numPag,
+
         keyWord1,
         keyWord2,
         keyWord3,
         keyWord4,
         keyWord5,
-        pubLocate,
-        yearPub,
-        numPag
+
+        poName,
+        titulation
     } = req.body;
 
     const completeName = firstName + " " + lastName;
@@ -62,19 +66,24 @@ app.post('/receberDados', (req, res) => {
         cutter: cutter,
         sobreAlu: lastName,
         nomeAlu: firstName,
-        tituloTcc: jobTitle,
         nomeComplAlu: completeName,
+
+        tituloTcc: workTitle,
+        tipoTrab: workType,
+        curso: course,
+        instituicao: institute,
         cidadeAlu: pubLocate,
         ano: yearPub,
-        numPags: numPag + "f",
-        tipoTrab: jobType,
-        tipoTrab2: "otoTipo",
-        nomeOrien: poName,
+        numPags: numPag + " f",
+
         chave1: keyWord1,
         chave2: keyWord2,
         chave3: keyWord3,
         chave4: keyWord4,
         chave5: keyWord5,
+
+        nomeOrien: poName,
+        titulacao: titulation
     });
 
     const buf = doc.getZip().generate({
@@ -86,7 +95,7 @@ app.post('/receberDados', (req, res) => {
         fs.writeFileSync(path.resolve(__dirname, `FichaCatalografica - ${completeName}.docx`), buf);
         console.log(`---===[ SIGEFICA INFORMA ]===---\n\nAluno: ${completeName}\n\nFICHA GERADA COM SUCESSO!\n\n`);
 
-        //const emailBibliotecaria = "emanoelheron@gmail.com"; // Email de PRD -> Produção (Comentar caso for usar HOM)
+        // const emailBibliotecaria = "emanoelheron@gmail.com"; // Email de PRD -> Produção (Comentar caso for usar HOM)
         const emailBibliotecaria = "derickjesiel96@gmail.com"; // Email de HOM -> Homologação (Comentar caso for usar PRD)
 
         const transporter = nodemailer.createTransport({
@@ -99,6 +108,8 @@ app.post('/receberDados', (req, res) => {
             }
         });
 
+        // CONTRUINDO A ESTRUTURA DO EMAIL 
+
         const construirEmail = {
             from: 'sigeficaifrn@gmail.com', // Seu endereço de e-mail
             to: emailBibliotecaria, // Endereço de e-mail do destinatário
@@ -106,11 +117,13 @@ app.post('/receberDados', (req, res) => {
             text: `Segue anexo a ficha catalográfica do aluno ${completeName}\n\nE-Mail do aluno para retorno: ${studentEmail}`,
             attachments: [
             {
-                filename: `FichaCatalografica - ${completeName}.docx`, // Nome do arquivo anexo
-                path: `C:/xampp/htdocs/sigefica/gerador-ficha/FichaCatalografica - ${completeName}.docx` // Caminho absoluto do arquivo
+                filename: `FichaCatalografica-${completeName}.docx`, // Nome do arquivo anexo
+                path: `C:/xampp/htdocs/sigefica/gerador-ficha/FichaCatalografica-${completeName}.docx` // Caminho absoluto do arquivo
             }
             ]
         };
+
+        // ENVIANDO O EMAIL
 
         try {
             transporter.sendMail(construirEmail);
@@ -121,7 +134,7 @@ app.post('/receberDados', (req, res) => {
         }
 
         setTimeout(() => {
-            const diretorioArquivo = `C:/xampp/htdocs/sigefica/gerador-ficha/FichaCatalografica - ${completeName}.docx`; // Modificar para o seu
+            const diretorioArquivo = `C:/xampp/htdocs/sigefica/gerador-ficha/FichaCatalografica-${completeName}.docx`; // Modificar para o seu
 
             fs.unlink(diretorioArquivo, (err) => {
                 if (err) {

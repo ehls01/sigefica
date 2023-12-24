@@ -28,7 +28,7 @@
     font-size: 30px;
 }
 
-/* ===== ESTILIZAÇÃO DO CORPO ===== */
+/* ===== ESTILIZAÇÃO DE ALERTAS ===== */
 
 .fade {
     opacity: 1;
@@ -73,6 +73,8 @@
     font-size: 20px;
 }
 
+/* ===== ESTILIZAÇÃO DO CORPO ===== */
+
 .sigefica{
     background-color: rgb(243, 255, 231);
     border: solid 1px #c0c4c0;
@@ -80,6 +82,10 @@
     padding: 2%;
     margin: 2% 25%;
     box-shadow: 5px 5px 10px rgb(118, 145, 91);
+}
+
+.explicacao{
+    font-size: 12px;
 }
 
 .input-group{
@@ -147,5 +153,5 @@ footer{
 }
 
 .logo-ifrn{
-    width: 30%;
+    width: 20%;
 }

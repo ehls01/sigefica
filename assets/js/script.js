@@ -40,13 +40,8 @@ function puxarInfos(event) {
     let localPublicacao = document.getElementById("localPublicacao").value;
     let anoPublicacao = document.getElementById("anoPublicacao").value;
     let numeroPaginas = document.getElementById("numeroPaginas").value;
-
-    // PRA QUE SERVEM
-    // TANTOS CÓDIGOS
-    // SE A VIDA 
-    // NÃO É PROGRAMADA
-    // E AS MELHORES COISAS
-    // NÃO TEM LÓGICA
+    let instituicao = document.getElementById("instituicao").value;
+    let cidadeAlu = document.getElementById("localPublicacao").value;
 
     // Criar código Cutter-Sanborn
     const buscarCodigo = buscarMaisSimilar(data, sobrenomeAluno).codigo;
@@ -60,9 +55,9 @@ function puxarInfos(event) {
         firstName: nomeAluno,
         lastName: sobrenomeAluno,
         cutter: cutterFinal,
-        jobTitle: tituloTrabalho,
-        jobType: tipoTrabalho,
-        curse: curso,
+        workTitle: tituloTrabalho,
+        workType: tipoTrabalho,
+        course: curso,
         studentEmail: emailAluno,
         poName: nomeOrientador,
         titulation: titulacao,
@@ -73,7 +68,9 @@ function puxarInfos(event) {
         keyWord5: palavraChave5,
         pubLocate: localPublicacao,
         yearPub: anoPublicacao,
-        numPag: numeroPaginas
+        numPag: numeroPaginas,
+        institute: instituicao,
+        pubLocate: cidadeAlu
     };
     
     fetch('http://localhost:3000/receberDados', {
@@ -104,6 +101,8 @@ function puxarInfos(event) {
             document.getElementById("localPublicacao").value = "";
             document.getElementById("anoPublicacao").value = "";
             document.getElementById("numeroPaginas").value = 0;
+            document.getElementById("instituicao").value = "";
+            document.getElementById("localPublicacao").value = "";
             
             topPage.scrollIntoView({
                 behavior: 'smooth',
@@ -141,6 +140,8 @@ function puxarInfos(event) {
             document.getElementById("localPublicacao").value = "";
             document.getElementById("anoPublicacao").value = "";
             document.getElementById("numeroPaginas").value = 0;
+            document.getElementById("instituicao").value = "";
+            document.getElementById("localPublicacao").value = "";
             
             topPage.scrollIntoView({
                 behavior: 'smooth',
@@ -178,6 +179,8 @@ function puxarInfos(event) {
             document.getElementById("localPublicacao").value = "";
             document.getElementById("anoPublicacao").value = "";
             document.getElementById("numeroPaginas").value = 0;
+            document.getElementById("instituicao").value = "";
+            document.getElementById("localPublicacao").value = "";
             
             topPage.scrollIntoView({
                 behavior: 'smooth',
@@ -214,6 +217,8 @@ function puxarInfos(event) {
             document.getElementById("localPublicacao").value = "";
             document.getElementById("anoPublicacao").value = 0;
             document.getElementById("numeroPaginas").value = "";
+            document.getElementById("instituicao").value = "";
+            document.getElementById("localPublicacao").value = "";
 
             // Scrollando para o topo da pagina
             topPage.scrollIntoView({
