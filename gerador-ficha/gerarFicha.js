@@ -91,72 +91,57 @@ app.post('/receberDados', (req, res) => {
         compression: "DEFLATE",
     });
 
-    try {
-        fs.writeFileSync(path.resolve(__dirname, `FichaCatalografica - ${completeName}.docx`), buf);
-        console.log(`---===[ SIGEFICA INFORMA ]===---\n\nAluno: ${completeName}\n\nFICHA GERADA COM SUCESSO!\n\n`);
+    fs.writeFileSync(path.resolve(__dirname, `FichaCatalografica - ${completeName}.docx`), buf);
+    console.log(`---===[ SIGEFICA INFORMA ]===---\n\nAluno: ${completeName}\n\nFICHA GERADA COM SUCESSO!\n\n`);
 
-        const emailBibliotecaria = "emanoelheron@gmail.com"; // Email de PRD -> Produção (Comentar caso for usar HOM)
-        // const emailBibliotecaria = "derickjesiel96@gmail.com"; // Email de HOM -> Homologação (Comentar caso for usar PRD)
+    //const emailBibliotecaria = "emanoelheron@gmail.com"; // Email de PRD -> Produção (Comentar caso for usar HOM)
+    const emailBibliotecaria = "derickjesiel96@gmail.com"; // Email de HOM -> Homologação (Comentar caso for usar PRD)
 
-        const transporter = nodemailer.createTransport({
-            host: 'smtp-relay.brevo.com', // Servidor SMTP
-            port: 587, // Porta do servidor SMTP
-            secure: false, // true para uso com SSL/TLS
-            auth: {
-              user: 'sigeficaifrn@gmail.com', // Seu endereço de e-mail
-              pass: 'NRwmqOtWxcFY9yVC' // Sua do brevo
-            }
-        });
-
-        // CONTRUINDO A ESTRUTURA DO EMAIL 
-
-        const construirEmail = {
-            from: 'sigeficaifrn@gmail.com', // Seu endereço de e-mail
-            to: emailBibliotecaria, // Endereço de e-mail do destinatário
-            subject: `Ficha catalográfica de ${completeName} para revisão`,
-            text: `Segue anexo a ficha catalográfica do aluno ${completeName}\n\nE-Mail do aluno para retorno: ${studentEmail}`,
-            attachments: [
-            {
-                filename: `FichaCatalografica-${completeName}.docx`, // Nome do arquivo anexo
-                path: `C:/xampp/htdocs/sigefica/gerador-ficha/FichaCatalografica - ${completeName}.docx` // Caminho absoluto do arquivo
-            }
-            ]
-        };
-
-        // ENVIANDO O EMAIL
-
-        try {
-            transporter.sendMail(construirEmail);
-            console.log(`---===[ SIGEFICA INFORMA ]===---\n\nDe: ${emailBibliotecaria}\nPara: ${studentEmail}\n\nAssunto: ${construirEmail.subject}\n\n\nEmail enviado com sucesso para a bibliotecária!\n\n`);
-        } catch (error) {
-            res.send('erro200');
-            console.log(`---===[ SIGEFICA INFORMA ]===---\n\n--- ERRO 200 ---\n\nFalha ao enviar e-mail!\n\n`);
+    const transporter = nodemailer.createTransport({
+        host: 'smtp-relay.brevo.com', // Servidor SMTP
+        port: 587, // Porta do servidor SMTP
+        secure: false, // true para uso com SSL/TLS
+        auth: {
+          user: 'sigeficaifrn@gmail.com', // Seu endereço de e-mail
+          pass: 'NRwmqOtWxcFY9yVC' // Sua do brevo
         }
+    });
 
-        setTimeout(() => {
-            const diretorioArquivo = `C:/xampp/htdocs/sigefica/gerador-ficha/FichaCatalografica - ${completeName}.docx`; // Modificar para o seu
+    // CONTRUINDO A ESTRUTURA DO EMAIL 
 
-            fs.unlink(diretorioArquivo, (err) => {
-                if (err) {
-                    res.send('erro204');
-                    console.error('---===[ SIGEFICA INFORMA ]===---\n\n--- ERRO 204 ---\n\nOcorreu um erro ao excluir o arquivo!\n\nErro:' + err + '\n\nDiretório:' + diretorioArquivo + '\n\n');
-                    return;
-                }
-                console.log('---===[ SIGEFICA INFORMA ]===---\n\nArquivo excluído com sucesso!\n\nSistema está pronto para gerar uma nova ficha!\n\n');
-            });
-        }, 2000);
-        res.send('success');
-    } catch (error) {
-        console.log(`---===[ SIGEFICA INFORMA ]===---\n\n--- ERRO 206 ---\n\nErro ao gerar ficha catalográfica e enviar para bibliotecária!\n\nErro: ${error}\n\n`);
-        res.send('erro206');
-    }
+    const construirEmail = {
+        from: 'sigeficaifrn@gmail.com', // Seu endereço de e-mail
+        to: emailBibliotecaria, // Endereço de e-mail do destinatário
+        subject: `Ficha catalográfica de ${completeName} para revisão`,
+        text: `Segue anexo a ficha catalográfica do aluno ${completeName}\n\nE-Mail do aluno para retorno: ${studentEmail}`,
+        attachments: [
+        {
+            filename: `FichaCatalografica-${completeName}.docx`, // Nome do arquivo anexo
+            path: `C:/xampp/htdocs/sigefica/gerador-ficha/FichaCatalografica - ${completeName}.docx` // Caminho absoluto do arquivo
+        }
+        ]
+    };
+    
+    transporter.sendMail(construirEmail);
+
+    setTimeout(() => {
+        const diretorioArquivo = `C:/xampp/htdocs/sigefica/gerador-ficha/FichaCatalografica - ${completeName}.docx`; // Modificar para o seu
+        fs.unlink(diretorioArquivo, (err) => {
+            if (err) {                
+                console.log("Erro ao excluir arquivo:", err);
+            }
+            return;
+        });
+    }, 5000);
+
+    res.send('success');
 });
 
 const definirPorta = 3000;
 
 app.listen(definirPorta, (err) => {
     if (err) {
-        console.log("deu madeira");
+        console.log(`---===[ SIGEFICA INFORMA ]===---\n\n--- ERRO ---\n\nFalha ao iniciar serviço\n\n`);
         return;
     }
     
