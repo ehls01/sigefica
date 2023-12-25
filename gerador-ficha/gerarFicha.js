@@ -62,6 +62,8 @@ app.post('/receberDados', (req, res) => {
         linebreaks: true,
     });
 
+    // CARREGA O VALOR ATRIBUIDO AS VARIAVEIS DO DOCX
+
     doc.render({
         cutter: cutter,
         sobreAlu: lastName,
@@ -91,11 +93,13 @@ app.post('/receberDados', (req, res) => {
         compression: "DEFLATE",
     });
 
+    // SUBSTITUI O VALOR DAS VARIAVEIS NO DOCX
+
     fs.writeFileSync(path.resolve(__dirname, `FichaCatalografica - ${completeName}.docx`), buf);
     console.log(`---===[ SIGEFICA INFORMA ]===---\n\nAluno: ${completeName}\n\nFICHA GERADA COM SUCESSO!\n\n`);
 
-    const emailBibliotecaria = "emanoelheron@gmail.com"; // Email de PRD -> Produção (Comentar caso for usar HOM)
-    //const emailBibliotecaria = "derickjesiel96@gmail.com"; // Email de HOM -> Homologação (Comentar caso for usar PRD)
+    const emailBibliotecaria = "emanoelheron@gmail.com"; // Email de PRD -> Homologação (Usando para testes)
+    //const emailBibliotecaria = "emailDaBiblioteca@gmail.com"; // Email de HOM -> Produção (Usando efetivamente) 
 
     // UTILIZANDO BREVO.COM PARA ENVIAR OS EMAIL'S
 

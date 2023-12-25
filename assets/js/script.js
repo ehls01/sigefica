@@ -6,7 +6,7 @@ function puxarInfos(event) {
     let success = document.getElementById('success');
     let unsuccess = document.getElementById('unsucess');
     
-    // Carregar informações do formulário:
+    // Carregando informações do formulário:
     let nomeAluno = document.getElementById("nomeAluno").value;
     let sobrenomeAluno = document.getElementById("sobrenomeAluno").value;
     let tituloTrabalho = document.getElementById("titulo").value;
@@ -37,6 +37,9 @@ function puxarInfos(event) {
     if (palavraChave5 != "") {
         palavraChave5 = "5. " + document.getElementById("palavraChave5").value + ".";
     }
+
+    // Carregando informações do formulário:
+
     let localPublicacao = document.getElementById("localPublicacao").value;
     let anoPublicacao = document.getElementById("anoPublicacao").value;
     let numeroPaginas = document.getElementById("numeroPaginas").value;
@@ -50,6 +53,8 @@ function puxarInfos(event) {
     primeiraLetraTrabalho = primeiraLetraTrabalho.toLowerCase();
 
     const cutterFinal = buscarCodigo + primeiraLetraTrabalho;
+
+    // ATRIBUINDO VALOR AS VARIAVEIS
 
     const informacoes = {
         firstName: nomeAluno,
@@ -82,15 +87,16 @@ function puxarInfos(event) {
     })
     .then(response => response.text())
     .then(message => {
-        console.log('Resposta do servidor:', message);        
-        
+        console.log('Resposta do servidor:', message);  
+              
+        //LIMPANDO INPUTS DO FORMULÁRIO
+
         if (message == "success") {
-            //Limpando campos
             document.getElementById("nomeAluno").value = "";
             document.getElementById("sobrenomeAluno").value = "";
             document.getElementById("titulo").value = "";
             document.getElementById("tipoTrabalho").selectedIndex = 0;
-            document.getElementById("curso").value = 0;
+            document.getElementById("curso").selectedIndex = 0;
             document.getElementById("email").value = "";
             document.getElementById("nomeOrientador").value = "";
             document.getElementById("titulacao").selectedIndex = 0;
@@ -100,7 +106,7 @@ function puxarInfos(event) {
             document.getElementById("palavraChave4").value = "";
             document.getElementById("palavraChave5").value = "";
             document.getElementById("localPublicacao").value = "";
-            document.getElementById("anoPublicacao").value = 0;
+            document.getElementById("anoPublicacao").value = "";
             document.getElementById("numeroPaginas").value = "";
             document.getElementById("instituicao").value = "";
             document.getElementById("localPublicacao").value = "";
@@ -127,6 +133,8 @@ function puxarInfos(event) {
             }, 3500);
         }
     })
+
+    // RETORNA A PÁGINA PARA CIMA
     .catch(error => {
         console.error('Erro:', error);
 
@@ -134,6 +142,8 @@ function puxarInfos(event) {
             behavior: 'smooth',
             block: 'start',
         });
+
+        // MOSTRANDO MENSAGEM DE ERRO
 
         unsuccess.style.display = 'flex';
         setTimeout(() => {              
