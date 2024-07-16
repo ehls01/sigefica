@@ -1,4 +1,5 @@
 const express = require('express');
+const nodemailer = require('nodemailer');
 const fs = require('fs');
 const PizZip = require("pizzip");
 const path = require("path");
@@ -11,32 +12,46 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.all('/', (req, res) => {
-    res.send('gerarFicha'); // Menssagem caso não exista conteúdo
+    const stringDefault = 
+    "---[ SIGEFICA -> Sistema Gerador de Ficha Catalográfica ]---<br><br>" +
+    "Desenvolvedores:<br><br>" +
+    "- Emanoel Heron<br>- Francisco Jordel<br>- Maria Eduarda<br>- Pedro Lucas<br>- Derick Carvalho<br><br>" +
+    "IFRN - 2023.2 - Mossoró - RN | Baraúna - RN";
+    res.send(stringDefault); // Menssagem caso não exista conteúdo
 });
 
-app.post('/receberDados', (req, res) => {    
+app.post('/receberDados', (req, res) => {        
 
     const {
-        firstName,
-        lastName,
         cutter,
-        jobTitle,
-        jobType,
-        curse,
-        poName,
-        titulation,
-        keyWords,
+        lastName,
+        firstName,
+        studentEmail,
+
+        workTitle,
+        workType,
+        course,
+        institute,
         pubLocate,
         yearPub,
-        numPag
+        numPag,
+
+        keyWord1,
+        keyWord2,
+        keyWord3,
+        keyWord4,
+        keyWord5,
+
+        poName,
+        titulation
     } = req.body;
 
     const completeName = firstName + " " + lastName;
     
-    console.log(`Funcionando! Seu nome é: ${completeName}`);    
+    console.log(`---===[ SIGEFICA INFORMA ]===---\n\nDados de ${completeName} carregados com sucesso!\n\n`);  
 
     const content = fs.readFileSync(
-        path.resolve(__dirname, "ficha-padrao.docx"),
+        path.resolve(__dirname, "ficha-padrao.docx"), // __dirname -> Puxa o nome do autor do arquivo base
         "binary"
     );
 
@@ -47,22 +62,30 @@ app.post('/receberDados', (req, res) => {
         linebreaks: true,
     });
 
+    // CARREGA O VALOR ATRIBUIDO AS VARIAVEIS DO DOCX
+
     doc.render({
         cutter: cutter,
         sobreAlu: lastName,
         nomeAlu: firstName,
-        tituloTcc: jobTitle,
         nomeComplAlu: completeName,
+
+        tituloTcc: workTitle,
+        tipoTrab: workType,
+        curso: course,
+        instituicao: institute,
+        cidadeAlu: pubLocate,
         ano: yearPub,
-        numPags: numPag + "f",
-        tipoTrab: jobType,
-        tipoTrab2: "otoTipo",
+        numPags: numPag + " f",
+
+        chave1: keyWord1,
+        chave2: keyWord2,
+        chave3: keyWord3,
+        chave4: keyWord4,
+        chave5: keyWord5,
+
         nomeOrien: poName,
-        chave1: keyWords,
-        chave2: "",
-        chave3: "",
-        chave4: "",
-        chave5: "",
+        titulacao: titulation
     });
 
     const buf = doc.getZip().generate({
@@ -70,30 +93,71 @@ app.post('/receberDados', (req, res) => {
         compression: "DEFLATE",
     });
 
-    try {
-        fs.writeFileSync(path.resolve(__dirname, "FichaCatalografica.docx"), buf);
-        res.send('Ficha gerada com sucesso!');
-    } catch (error) {
-        res.send('Erro ao gerar ficha\n\nErro:', error);
-    }
-});
+    // SUBSTITUI O VALOR DAS VARIAVEIS NO DOCX
 
-const diretorioArquivo = 'C:/xampp/htdocs/sigefica/gerador-ficha/FichaCatalografica.docx'; // Modificar para o seu
+    fs.writeFileSync(path.resolve(__dirname, `FichaCatalografica - ${completeName}.docx`), buf);
+    console.log(`---===[ SIGEFICA INFORMA ]===---\n\nAluno: ${completeName}\n\nFICHA GERADA COM SUCESSO!\n\n`);
 
-app.get('/excluirArquivo', (req, res) => { 
+    const emailBibliotecaria = "emanoelheron@gmail.com"; // Email de PRD -> Homologação (Usando para testes)
+    //const emailBibliotecaria = "emailDaBiblioteca@gmail.com"; // Email de HOM -> Produção (Usando efetivamente) 
 
-    fs.unlink(diretorioArquivo, (err) => {
-        if (err) {
-          console.error('Ocorreu um erro ao excluir o arquivo:', err);
-          return;
+    // UTILIZANDO BREVO.COM PARA ENVIAR OS EMAIL'S
+
+    const transporter = nodemailer.createTransport({
+        host: 'smtp-relay.brevo.com', // Servidor SMTP
+        port: 587, // Porta do servidor SMTP
+        secure: false, // true para uso com SSL/TLS
+        auth: {
+          user: 'sigeficaifrn@gmail.com', // Seu endereço de e-mail
+          pass: 'NRwmqOtWxcFY9yVC' // Senha do brevo
         }
-        console.log('Arquivo excluído com sucesso!');
     });
 
+    // CONTRUINDO A ESTRUTURA DO EMAIL 
+
+    const construirEmail = {
+        from: 'sigeficaifrn@gmail.com', // Seu endereço de e-mail
+        to: emailBibliotecaria, // Endereço de e-mail do destinatário
+        subject: `Ficha catalográfica de ${completeName} para revisão`,
+        text: `Segue anexo a ficha catalográfica do aluno ${completeName}\n\nE-Mail do aluno para retorno: ${studentEmail}`,
+        attachments: [
+        {
+            filename: `FichaCatalografica-${completeName}.docx`, // Nome do arquivo anexo
+            path: `C:/xampp/htdocs/sigefica/gerador-ficha/FichaCatalografica - ${completeName}.docx` // Caminho absoluto do arquivo
+        }
+        ]
+    };
+    
+    // ENVIANDO O EMAIL
+
+    transporter.sendMail(construirEmail);
+
+    // EXCLUINDO O ARQUIVO DA FICHA GERADA
+
+    setTimeout(() => {
+        const diretorioArquivo = `C:/xampp/htdocs/sigefica/gerador-ficha/FichaCatalografica - ${completeName}.docx`;
+        fs.unlink(diretorioArquivo, (err) => {
+            if (err) {                
+                console.log("Erro ao excluir arquivo:", err);
+            }
+            return;
+        });
+    }, 5000);
+
+    res.send('success');
 });
+
+// DEFINE A PORTA DO SERVIDOR
 
 const definirPorta = 3000;
 
-app.listen(definirPorta, () => {
-    console.log(`Servidor Node.js está rodando em http://localhost:${definirPorta}`);
+// MENSAGEM DE ERRO CASO O SERVIDOR NÃO SEJA INICIADO
+
+app.listen(definirPorta, (err) => {
+    if (err) {
+        console.log(`---===[ SIGEFICA INFORMA ]===---\n\n--- ERRO ---\n\nFalha ao iniciar serviço\n\n`);
+        return;
+    }
+    
+    console.log(`\n\n---===[ SIGEFICA INFORMA ]===---\n\nSistema executado com sucesso!\n\n------------------------------------------\n\nSistema rodando em: http://localhost:${definirPorta}\n\n`);
 });
