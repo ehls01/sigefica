@@ -86,7 +86,7 @@ function puxarInfos(event) {
     .then(response => response.text())
     .then(message => {
         console.log('Resposta do servidor:', message);
-        if (message == "erro 200") {
+        if (message == "erro200") {
             // Limpando campos
             document.getElementById("nomeAluno").value = "";
             document.getElementById("sobrenomeAluno").value = "";
