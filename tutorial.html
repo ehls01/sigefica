@@ -9,90 +9,103 @@
     <title>Sigefica - Tutorial</title>
 </head>
 <body>
-<header class="navbar">
-    <img src="./assets/imgs/logo-if.png" alt="logo-ifrn">
-    <h1>Sigefica - Tutoria de uso</h1>
-    <a class="pag-tutorial" href="./index.php">Página Inicial</a>
-</header>
+    <header id="topPage" class="navbar">
+        <div class="logo-container">
+            <img src="./assets/imgs/logo-if.png" alt="Logo IFRN" class="logo-if">
+        </div>
+        <h1 class="navbar-title">Sigefica - Sistema Gerador de Ficha Catalográfica</h1>
+        <nav class="navbar-links">
+            <a class="pag-tutorial" href="./index.html">Página Inicial</a>
+        </nav>
+    </header>
 
 <main class="flex-column-center">
     <section class="tutorialList padding-25px flex-column-center">
+
+        <!-- DADOS PESSOAIS -->
+
         <div class="flex-column-left width-75">
             <h1 class="padding-25px width-100 text-center">Área → Informações Básicas</h1>
-            <img src="./assets/imgs/prints-tutorial/basic-infos.png" alt="">
+            <img src="./assets/imgs/prints-tutorial/dados-pessoais.PNG" alt="">
         
             <div class="tutorialInfos">
                 <h3>Instruções</h3>
                 <ul>
                     <li>Nome → Digite seu nome, deixando de fora apenas o último sobrenome, exemplo: João Pedro de Oliveia → João Pedro de</li>
                     <li>Sobrenome → Aqui sim você digita seu sobrenome, exempl: João Pedro de Oliveira → Oliveira</li>
-                    <li>Título → Digite o título completo do trabalho</li>
-                    <li>Tipo de trabalho → Selecione a opção que mais condiz com o tipo do seu trabalho</li>
-                    <li>Curso → Selecione seu curso</li>
                     <li>Email → Informe um email, esse email será usado para o envio da ficha catalográfica revisada</li>
                 </ul>
             </div>
         </div>
 
+        <!-- DADOS DO TRABALHO -->
+
         <div class="flex-column-left width-75">
-            <h1 class="padding-25px width-100 text-center">Área → Dados do Orientador</h1>
-            <img src="./assets/imgs/prints-tutorial/po-data.png" alt="">
+            <h1 class="padding-25px width-100 text-center">Área → Dados do Trabalho</h1>
+            <img src="./assets/imgs/prints-tutorial/dados-trabalho.PNG" alt="">
         
             <div class="tutorialInfos">
                 <h3>Instruções</h3>
                 <ul>
-                    <li>Nome do Orientador → Digite o nome do orientador do seu projeto</li>
-                    <li>Titulação → Selecione a opção que condiz com a titulação do seu orientador</li>
+                    <li>Título → Digite o título completo do trabalho</li>
+                    <li>Tipo de trabalho → Selecione a opção que mais condiz com o tipo do seu trabalho</li>
+                    <li>Curso → Selecione seu curso</li>
+                    <li>Instituição → Informe sua Instituição</li>
+                    <li>Cidade → Digite a cidade onde fica a instituição</li>
+                    <li>Ano de publicação → Selecione o ano em que seu trabalho será publicado</li>
+                    <li>Número de páginas → Digite a quantidade de páginas que seu trabalho possui</li>
                 </ul>
             </div>
         </div>
 
+        <!-- PALAVRAS CHAVE -->
+
         <div class="flex-column-left width-75">
             <h1 class="padding-25px width-100 text-center">Área → Palavras Chave</h1>
-            <img src="./assets/imgs/prints-tutorial/key-words.png" alt="">
+            <img src="./assets/imgs/prints-tutorial/palavras-chave.PNG" alt="">
         
             <div class="tutorialInfos">
                 <h3>Instruções</h3>
                 <ul>
                     <li>Campos → Cada campo equivale a SOMENTE UMA palavra chave</li>
-                    <li>Quantidade → A quantidade mínima de palavras chave é 1, e a máxima é 5 → Caso seu trabalho possua menos de 5, 
+                    <li>Quantidade → A quantidade mínima de palavras chave são 3, e a máxima são 5 → Caso seu trabalho possua menos de 3, 
                         deixar os demais campos em BRANCO</li>
                 </ul>
             </div>
         </div>
 
+        <!-- DADOS DO ORIENTADOR -->
+
         <div class="flex-column-left width-75">
-            <h1 class="padding-25px width-100 text-center">Área → Palavras Chave</h1>
-            <img src="./assets/imgs/prints-tutorial/other-informations.png" alt="">
+            <h1 class="padding-25px width-100 text-center">Área → Dados do Orientador</h1>
+            <img src="./assets/imgs/prints-tutorial/orientador.PNG" alt="">
         
             <div class="tutorialInfos">
                 <h3>Instruções</h3>
                 <ul>
-                    <li>Cidade → Digite a cidade onde fica a instituição</li>
-                    <li>Ano de publicação → Selecione o ano em que seu trabalho será publicado</li>
-                    <li>Número de páginas → Digite a quantidade de páginas que seu trabalho possui</li>
-                    <li>Gerar ficha → Pronto! Clique neste botão para verificar se nenhum campo está em branco, 
-                        caso tenha preenchido tudo, o sistema gerará a ficha e enviará para a bibliotecária! Fique 
-                        atento ao seu email para receber o retorno da ficha!</li>
+                    <li>Nome → Digite o nome do orientador do seu projeto</li>
+                    <li>Titulação → Selecione a opção que condiz com a titulação do seu orientador</li>
                 </ul>
             </div>
         </div>
+
     </section>
     
 </main>
 
 <footer>
-    <img class="logo-ifrn" src="./assets/imgs/logo-ifrn.png" alt="logo-ifrn">
+    <img class="logo-ifrn" src="./assets/imgs/logo-if.png" alt="logo-ifrn">
     <div class="devs">
         <h5>Densenvolvedores:</h5>
         <a href="https://github.com/ehls01">Emanoel Heron</a>
-        <p>Francisco Jordel</p>
-        <p>Maria Eduarda</p>
-        <p>Pedro Lucas</p>
-        <a href="https://github.com/DerickCarvalho">Derick Carvalho -> API</a>
+        <p>Carlos Renkley</p>
+        <p>Carlos Andrey</p>
+        <!-- <p>Francisco Jordel</p> -->
+        <!-- <p>Maria Eduarda</p> -->
+        <!-- <p>Pedro Lucas</p> -->
+        <!-- <a href="https://github.com/DerickCarvalho">Derick Carvalho -> API</a> -->
     </div>
-    <p>@Sigefica</p>
-    <p>2023</p>
+    <p>@Sigefica 2025</p>
 </footer>
 </body>
 </html>

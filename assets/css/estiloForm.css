@@ -9,24 +9,72 @@
 
 /* ===== ESTILIZAÇÃO DO CABEÇALHO ===== */
 
-.navbar{
-    background-color: #298f15;
+.navbar {
+    background-color: #32a31c;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 2%;
-    font-size: 15px;
+    padding: 15px 5%;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: background-color 0.3s ease-in-out;
 }
 
-.logo-if{
-    width: 30%;
+.logo-if {
+    width: 50px;
+    height: auto;
 }
 
-.pag-tutorial{
+.navbar-title {
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    flex-grow: 1;
+    font-weight: bold;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+}
+
+.pag-tutorial {
     text-decoration: none;
-    color: black;
-    font-size: 30px;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s;
 }
+
+.pag-tutorial:hover {
+    background-color: white;
+    color: #298f15;
+}
+
+/* Responsivo */
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .navbar-title {
+        font-size: 18px;
+        margin: 10px 0;
+    }
+
+    .pag-tutorial {
+        font-size: 16px;
+        padding: 6px 12px;
+    }
+}
+
 
 /* ===== ESTILIZAÇÃO DO CORPO ===== */
 
@@ -119,33 +167,87 @@
     background-color: #39b81f;
 }
 
-/* ===== ESTILIZAÇÃO DO PDF */
-
-.pdf-container {
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-}
-
-.pdf-object {
-    width: 100%;
-    height: 100%;
-}
-
 /* ===== ESTILIZAÇÃO DO RODAPÉ ===== */
 
-footer{
-    background-color: #298f15;
+footer {
+    background-color: #32a31c;
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: space-between;
     align-items: center;
-    padding: 1.5%;
-}
-.devs a{
-    text-decoration: none;
-    color: black;
+    padding: 2% 5%;
+    color: white;
 }
 
-.logo-ifrn{
-    width: 30%;
+footer .logo-ifrn {
+    width: 5%;
+    max-width: 150px;
+    margin-right: 20px;
+}
+
+.devs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 10px 0;
+}
+
+.devs h5 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.devs ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.devs li {
+    font-size: 1em;
+    margin: 5px 0;
+}
+
+.devs a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.devs a:hover {
+    color: #ffd700;
+}
+
+footer .footer-bottom {
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+footer .footer-bottom p {
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    footer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo-ifrn {
+        width: 50%;
+        max-width: 100px;
+        margin-bottom: 20px;
+    }
+
+    .devs {
+        text-align: center;
+    }
+
+    .footer-bottom p {
+        font-size: 0.8em;
+    }
 }

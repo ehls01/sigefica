@@ -41,13 +41,6 @@ function puxarInfos(event) {
     let anoPublicacao = document.getElementById("anoPublicacao").value;
     let numeroPaginas = document.getElementById("numeroPaginas").value;
 
-    // PRA QUE SERVEM
-    // TANTOS CÓDIGOS
-    // SE A VIDA 
-    // NÃO É PROGRAMADA
-    // E AS MELHORES COISAS
-    // NÃO TEM LÓGICA
-
     // Criar código Cutter-Sanborn
     const buscarCodigo = buscarMaisSimilar(data, sobrenomeAluno).codigo;
 

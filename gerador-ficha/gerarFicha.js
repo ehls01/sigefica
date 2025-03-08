@@ -8,7 +8,7 @@ const Docxtemplater = require("docxtemplater");
 const bodyParser = require('body-parser');
 const app = express();
 
-const saveFichaDirectory = "C:/Users/DerickCarvalho/Desktop/ProjetosGIT/sigefica/gerador-ficha";
+const saveFichaDirectory = "F:/Desktop/sigefica/gerador-ficha";
 const EMAIL_USER = "ifrnsigefica@gmail.com";
 const EMAIL_PASS = "ngqc ruuy yvfu hekm";
 
@@ -19,8 +19,8 @@ app.all('/', (req, res) => {
     const stringDefault = 
     "---[ SIGEFICA -> Sistema Gerador de Ficha Catalográfica ]---<br><br>" +
     "Desenvolvedores:<br><br>" +
-    "- Emanoel Heron<br>- Francisco Jordel<br>- Maria Eduarda<br>- Pedro Lucas<br>- Derick Carvalho<br><br>" +
-    "IFRN - 2023.2 - Mossoró - RN | Baraúna - RN";
+    "- Emanoel Heron<br>- Carlos Andrey<br>- Carlos Renkley<br><br>" +
+    "IFRN - 2025.1 - Mossoró - RN | Baraúna - RN";
     res.send(stringDefault); // Menssagem caso não exista conteúdo
 });
 
